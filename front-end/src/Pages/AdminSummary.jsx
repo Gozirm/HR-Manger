@@ -10,7 +10,7 @@ const AdminSummary = () => {
     <>
       <main className="container">
         <h1 className="mt-4">Dashboard</h1>
-        <div className="mt-4 gap-lg-4 d-lg-flex ">
+        <div className="mt-4 gap-4 d-lg-flex d-md-block  ">
           <div className="d-flex justify-content-between align-items-center sections">
             <div>
               <h6 className="title-admin">Total Employees </h6>

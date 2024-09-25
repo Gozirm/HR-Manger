@@ -4,6 +4,7 @@
   border-radius: 10px;
   padding: 28px 17px 28px 17px;
   border: 1px solid var(--gray);
+  margin-bottom: 2rem;
 }
 .title-tr {
   font-size: 20px;

@@ -1,21 +1,28 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import { sidebarLinks } from "../db";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import menu from "../assets/menu_24dp_E_FILL0_wght400_GRAD0_opsz24.svg";
+import { useState } from "react";
 import logo from "../assets/logo-svg.svg";
 import arrowUp from "../assets/Vector.svg";
 import arrowDown from "../assets/Vector (1).svg";
-import "../Styles/AdminDashboard.css";
-import { Link } from "react-router-dom";
+import { sidebarLinks } from "../db";
 import { NavLink } from "react-router-dom";
-import NavBar from "../layout/NavBar";
-const AdminDashboard = () => {
+
+const NavOffcanvas = ({ name, ...props }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
-      <main className="container-fluid d-flex admin-main">
-        {/* main-section */}
-        <section className=" admin-body d-none d-md-block d-flex row">
+      <div onClick={handleShow}>
+        <img src={menu} alt="" className="menu" />
+      </div>
+      <Offcanvas show={show} onHide={handleClose} {...props}  style={{width:"53%"}}>
+        <Offcanvas.Body>
+          <section className="d-flex row">
             {/* Logo */}
-            <div className="d-flex justify-content-between align-items-center mb-5">
+            <div className="d-flex align-items-center">
               <div className="d-flex gap-2 ">
                 <img src={logo} alt="logo" className="logo-dash" />
                 <div className="pt-3">
@@ -54,15 +61,11 @@ const AdminDashboard = () => {
               </div>
             </section>
             {/* Main ========================== */}
-        </section>
-        {/* section-2 */}
-        <section className="px-lg-5  w-100 nav-out">
-            <NavBar/>
-            <Outlet />
-        </section>
-      </main>
+          </section>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 };
 
-export default AdminDashboard;
+export default NavOffcanvas;

@@ -33,7 +33,12 @@ const SignIn = () => {
   }
   const navigate = useNavigate();
   function handleNavigate() {
-    navigate("/admin-dashboard");
+    if (handleSubmit(onSubmit)) {
+      console.log("ERROR");
+      navigate("/admin-dashboard");
+    } else {
+      console.log("Good");
+    }
   }
   return (
     <>

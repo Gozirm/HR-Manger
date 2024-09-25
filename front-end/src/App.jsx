@@ -12,6 +12,7 @@ import LeaveBoard from "./Pages/LeaveBoard";
 import PayRoll from "./Pages/PayRoll";
 import Settings from "./Pages/Settings";
 import Error from "./Pages/Error";
+import 'animate.css';
 function App() {
   return (
     <>
@@ -31,7 +32,7 @@ function App() {
             <Route path="/admin-dashboard/payroll" element={<PayRoll />} />
             <Route path="/admin-dashboard/settings" element={<Settings />} />
           </Route>
-          <Route path="*" element={<Error/>}/>
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </>
