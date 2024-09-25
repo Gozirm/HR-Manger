@@ -40,7 +40,7 @@ const AdminDashboard = () => {
                 {sidebarLinks.map((sidebarLinks) => {
                   const { id, icon, name, path } = sidebarLinks;
                   return (
-                    <section key={id} className="mb-4">
+                    <section key={id} className="mb-2">
                       <NavLink
                         to={path}
                         className="btn-admin text-start d-flex gap-2 align-items-center"
