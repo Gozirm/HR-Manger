@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+:root {
+  --font-family-head: "Bricolage Grotesque", sans-serif;
+  --font-family-body: "Inter", sans-serif;
+  --font-family-main: "DM Sans", sans-serif;
+  --blue: #3439ca;
+  --gray: #f3f3f3;
+  --black: #343536;
+  --label: #111014;
+  --dark-gray: #acacac;
+}
+
+body{
+  max-width: 1580px;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  color: var(--blue);
+  font-family: var(--font-family-body);
+}
+h1{
+  font-size: 24px;
+  font-weight: 500;
+  color: #161E54;
+  padding-top: 5px;
+}
