@@ -53,8 +53,8 @@ nav{
     font-size: 13px;
   }
 }
-/* @media(max-width: 992px){
+@media(max-width: 992px){
   .form-nav{
-    width: 13rem;
+    width: 100%;
   }
-} */
+}

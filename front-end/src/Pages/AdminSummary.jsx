@@ -34,7 +34,7 @@ const AdminSummary = () => {
           </div>
         </div>
         {/* Tables */}
-        <div className="mt-5 border p-3 rounded-4">
+        <div className="mt-5 border p-4  rounded-4">
           <h2>Tables</h2>
           <div>
             <Table responsive="lg">

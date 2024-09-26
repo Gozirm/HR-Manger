@@ -8,57 +8,64 @@ import "../Styles/AdminDashboard.css";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import NavBar from "../layout/NavBar";
+import { useState } from "react";
 const AdminDashboard = () => {
   return (
     <>
       <main className="container-fluid d-flex admin-main">
         {/* main-section */}
         <section className=" admin-body d-none d-md-block d-flex row">
-            {/* Logo */}
-            <div className="d-flex justify-content-between align-items-center mb-5">
-              <div className="d-flex gap-2 ">
-                <img src={logo} alt="logo" className="logo-dash" />
-                <div className="pt-3">
-                  <h2 className="h2-admin m-0">HR Manger</h2>
-                  <p className="p-admin">hrmanager@yahoo.com</p>
-                </div>
-              </div>
-              {/* ARROW */}
-              <div className="ms-2">
-                <div>
-                  <img src={arrowUp} alt="" />
-                </div>
-                <div>
-                  <img src={arrowDown} alt="" />
-                </div>
+          {/* Logo */}
+          <div className="d-flex justify-content-between align-items-center mb-5">
+            <div className="d-flex gap-2 ">
+              <img src={logo} alt="logo" className="logo-dash" />
+              <div className="pt-3">
+                <h2 className="h2-admin m-0">HR Manger</h2>
+                <p className="p-admin">hrmanager@yahoo.com</p>
               </div>
             </div>
-            {/* MAIN SECTION */}
-            <section className="main-section">
-              <h3 className="mb-4 main-tag">MAIN MENU</h3>
+            {/* ARROW */}
+            <div className="ms-2">
               <div>
-                {sidebarLinks.map((sidebarLinks) => {
-                  const { id, icon, name, path } = sidebarLinks;
-                  return (
-                    <section key={id} className="mb-2">
-                      <NavLink
-                        to={path}
-                        className="btn-admin text-start d-flex gap-2 align-items-center"
-                      >
-                        <img src={icon} alt="" className="icon-img" />
-                        <h6 className="names mt-2"> {name}</h6>
-                      </NavLink>
-                    </section>
-                  );
-                })}
+                <img src={arrowUp} alt="" />
               </div>
-            </section>
-            {/* Main ========================== */}
+              <div>
+                <img src={arrowDown} alt="" />
+              </div>
+            </div>
+          </div>
+          {/* MAIN SECTION */}
+          <section className="main-section">
+            <h3 className="mb-4 main-tag">MAIN MENU</h3>
+            <div>
+              {sidebarLinks.map((sidebarLinks) => {
+                const { id, icon, name, path, activeIcon } = sidebarLinks;
+                return (
+                  <NavLink key={id} to={path} end>
+                    {({ isActive }) => (
+                      <section
+                        className={`btn-admin  d-flex gap-2 align-items-center ${
+                          isActive ? "active" : ""
+                        }`}
+                      >
+                        <img
+                          src={isActive ? activeIcon : icon}
+                          className="icon-img"
+                        />
+                        <h6 className="names mt-2"> {name}</h6>
+                      </section>
+                    )}
+                  </NavLink>
+                );
+              })}
+            </div>
+          </section>
+          {/* Main ========================== */}
         </section>
         {/* section-2 */}
         <section className="px-lg-5  w-100 nav-out">
-            <NavBar/>
-            <Outlet />
+          <NavBar />
+          <Outlet />
         </section>
       </main>
     </>
@@ -66,3 +73,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+

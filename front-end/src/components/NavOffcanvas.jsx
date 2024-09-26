@@ -18,7 +18,7 @@ const NavOffcanvas = ({ name, ...props }) => {
       <div onClick={handleShow}>
         <img src={menu} alt="" className="menu" />
       </div>
-      <Offcanvas show={show} onHide={handleClose} {...props}  style={{width:"53%"}}>
+      <Offcanvas show={show} onHide={handleClose} {...props}  style={{width:"53%", height: "100%"}}>
         <Offcanvas.Body>
           <section className="d-flex row">
             {/* Logo */}
@@ -45,17 +45,23 @@ const NavOffcanvas = ({ name, ...props }) => {
               <h3 className="mb-4 main-tag">MAIN MENU</h3>
               <div>
                 {sidebarLinks.map((sidebarLinks) => {
-                  const { id, icon, name, path } = sidebarLinks;
+                  const { id, icon, name, path, activeIcon } = sidebarLinks;
                   return (
-                    <section key={id} className="mb-2">
-                      <NavLink
-                        to={path}
-                        className="btn-admin text-start d-flex gap-2 align-items-center"
+                    <NavLink key={id} to={path} end>
+                    {({ isActive }) => (
+                      <section
+                        className={`btn-admin  d-flex gap-2 align-items-center ${
+                          isActive ? "active" : ""
+                        }`}
                       >
-                        <img src={icon} alt="" className="icon-img" />
+                        <img
+                          src={isActive ? activeIcon : icon}
+                          className="icon-img"
+                        />
                         <h6 className="names mt-2"> {name}</h6>
-                      </NavLink>
-                    </section>
+                      </section>
+                    )}
+                  </NavLink>
                   );
                 })}
               </div>

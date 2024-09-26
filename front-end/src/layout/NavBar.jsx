@@ -23,7 +23,7 @@ const NavBar = () => {
   }
   return (
     <>
-      <nav className="mb-lg-5 container ">
+      <nav className="mb-lg-5 container position-sticky top-0 m-auto  bg-white">
         <div className="d-md-flex justify-content-between  mt-3 align-items-center">
           <div className="d-flex gap-2 align-items-center">
             <div className="d-md-none d-sm-block">

@@ -6,13 +6,16 @@ import ForgotPwd from "./Auth/ForgotPwd";
 import CheckEmail from "./Auth/CheckEmail";
 import AdminDashboard from "./Pages/AdminDashboard";
 import AdminSummary from "./Pages/AdminSummary";
-import Employees from "./Pages/Employees";
 import TaskBoard from "./Pages/TaskBoard";
 import LeaveBoard from "./Pages/LeaveBoard";
 import PayRoll from "./Pages/PayRoll";
 import Settings from "./Pages/Settings";
 import Error from "./Pages/Error";
 import 'animate.css';
+import Teams from "./Pages/SubPages/Teams";
+import All from "./Pages/Employees";
+import AddEmployees from "./Pages/AddEmployees";
+import Employees from "./Pages/Employees";
 function App() {
   return (
     <>
@@ -23,7 +26,12 @@ function App() {
           <Route path="/auth/checkemail" element={<CheckEmail />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />}>
             <Route path="" element={<AdminSummary />} />
-            <Route path="/admin-dashboard/employess" element={<Employees />} />
+            {/* Employess Sub Pages */}
+            <Route path="/admin-dashboard/employess" element={<Employees/>} >
+            <Route path="/admin-dashboard/employess/teams" element={<Teams/>}/>
+            </Route>
+            <Route path="/admin-dashboard/employess/add-employess" element={<AddEmployees/>}/>
+            {/* =================================================== */}
             <Route path="/admin-dashboard/taskboard" element={<TaskBoard />} />
             <Route
               path="/admin-dashboard/leaveboard"

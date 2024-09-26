@@ -1,11 +1,14 @@
 .nav-out {
-  margin-left: 200px;
+  margin-left: 220px;
 }
 .admin-body {
   border-right: 1px solid var(--gray);
-  height: 100vh; 
+  height: 100%; 
   position: fixed;
-  /* top: rem; */
+}
+.active{
+  background-color: #EDF5FF;
+  color: var(--blue);
 }
 .logo-dash {
   width: 2.5rem;
@@ -41,7 +44,7 @@
   width: 100%;
   border-radius: 5px;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .logo-dash {
     width: 1.5rem;
   }
@@ -56,11 +59,16 @@
   }
   .nav-out {
     margin-left: 200px;
+    max-width: 73%;
+    /* margin: auto; */
+
   }
 }
 @media (max-width: 767px) {
   .nav-out {
-    margin-left: 0;
-    width: 20px;
+    margin-left: 20px;
+    max-width: 100%;
+    margin: auto;
+    
   }
 }

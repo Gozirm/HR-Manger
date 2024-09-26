@@ -35,9 +35,10 @@
   font-weight: 400;
   font-family: var(--font-family-body);
 }
+/* Dashboard */
 .planned {
   color: #f29b07;
-  background-color: #FFF5E3;
+  background-color: #fff5e3;
   width: 93px;
   margin: auto;
   height: 27px;
@@ -47,7 +48,7 @@
 
 .completed {
   color: #0d805d;
-  background-color: #E5FFF7;
+  background-color: #e5fff7;
   width: 115px;
   margin: auto;
   height: 27px;
@@ -57,13 +58,44 @@
 
 .in-progress {
   color: #137ff2;
-  background-color: #9DD2EF42;
+  background-color: #9dd2ef42;
   width: 117px;
   margin: auto;
   height: 27px;
   padding: 4px, 16px, 4px, 16px;
   border-radius: 50px;
 }
+/* Employess */
+.on-site {
+  color: #0d805d;
+  background-color: #e5fff7;
+  width: 115px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.hybrid {
+  color: #137ff2;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
+
+.remote {
+  color: #f29b07;
+  background-color: #fff5e3;
+  width: 93px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
 .start {
   font-weight: 400;
   font-size: 16px;
