@@ -11,8 +11,8 @@ const Employees = () => {
     <main className="container">
       <h1 className="mt-4">Employees</h1>
       <p className="title">Dashboard/Employee</p>
-      <div className="d-flex align-items-center justify-content-between">
-        <div className="d-flex align-items-center gap-md-5 gap-4">
+      <div className="d-flex align-items-center justify-content-between gap-4">
+        <div className="d-flex align-items-center gap-md-5 gap-3">
           <Link
             to="/admin-dashboard/employess"
             className={employeesActive ? "active-link" : "text-secondary"}
