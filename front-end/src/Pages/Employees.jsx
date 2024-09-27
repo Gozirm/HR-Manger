@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Employ } from "../tables";
 import Table from "react-bootstrap/Table";
 import { Outlet, Link, useMatch } from "react-router-dom";
 import addIcon from "../assets/addIcon.svg";
 const Employees = () => {
   const match = useMatch("/admin-dashboard/employess");
+  const [employeesActive, setEmployeesActive] = useState(true);
+  const [teamsActive, setTeamsActive] = useState(false);
   return (
     <main className="container">
       <h1 className="mt-4">Employees</h1>
       <p className="title">Dashboard/Employee</p>
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-md-5">
-          <Link to="/admin-dashboard/employess">All Employees</Link>
-          <Link to="/admin-dashboard/employess/teams" className="">
+          <Link
+            to="/admin-dashboard/employess"
+            className={employeesActive ? "active-link" : "text-secondary"}
+            onClick={() => {
+              setEmployeesActive(true);
+              setTeamsActive(false);
+            }}
+          >
+            All Employees
+          </Link>
+          <Link
+            to="/admin-dashboard/employess/teams"
+            className={teamsActive ? "active-link" : "text-secondary"}
+            onClick={() => {
+              setEmployeesActive(false);
+              setTeamsActive(true);
+            }}
+          >
             Team
           </Link>
         </div>
@@ -30,11 +48,11 @@ const Employees = () => {
           </button>
         </Link>
       </div>
-      <hr />
+      <hr/>
       {/* Tables */}
       {match ? (
         <div className="mt-5 border p-3 rounded-4">
-          <div >
+          <div>
             <Table responsive="lg">
               <thead className="text-white">
                 <tr className="title-tr">
@@ -85,9 +103,7 @@ const Employees = () => {
       ) : (
         <Outlet />
       )}
-      <section>
-        
-      </section>
+      <section></section>
     </main>
   );
 };

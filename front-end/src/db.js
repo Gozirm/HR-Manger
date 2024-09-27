@@ -55,3 +55,43 @@ export const sidebarLinks = [
     path: "/admin-dashboard/settings",
   },
 ];
+
+
+// Teams
+import teamImg from "../src/assets/team1.svg"
+import teamImg2 from "../src/assets/team2.svg"
+import teamImg3 from "../src/assets/team3.svg"
+import teamImg4 from "../src/assets/team4.svg"
+import teamImg5 from "../src/assets/team5.svg"
+export const teams = [
+  {
+    id: 1,
+    name: "Aisha Akinwunmi",
+    position: "Manager",
+    Image: teamImg,
+  },
+  {
+    id: 2,
+    name: "Kingsley Ifijie",
+    position: "Front-end Developer",
+    Image: teamImg2,
+  },
+  {
+    id: 3,
+    name: "Kekere-Ekun Tolani",
+    position: "Data Analyst",
+    Image: teamImg3,
+  },
+  {
+    id: 4,
+    name: "Badmus John",
+    position: "Manager",
+    Image: teamImg4,
+  },
+  {
+    id: 5,
+    name: "Oluwatobi Damilola",
+    position: "Back-End Developer",
+    Image: teamImg5,
+  },
+];

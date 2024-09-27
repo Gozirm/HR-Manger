@@ -10,6 +10,9 @@
   background-color: #EDF5FF;
   color: var(--blue);
 }
+.active-link {
+  border-bottom: 2px solid blue;
+}
 .logo-dash {
   width: 2.5rem;
 }
@@ -44,6 +47,11 @@
   width: 100%;
   border-radius: 5px;
 }
+/* Teams */
+.teams{
+  width: 50%;
+  margin-bottom: 3rem;
+}
 @media (max-width: 992px) {
   .logo-dash {
     width: 1.5rem;
@@ -63,6 +71,10 @@
     /* margin: auto; */
 
   }
+  .teams{
+    width: 100%;
+    margin-bottom: 3rem;
+  }
 }
 @media (max-width: 767px) {
   .nav-out {
@@ -70,5 +82,9 @@
     max-width: 100%;
     margin: auto;
     
+  }
+  .teams{
+    width: 100%;
+    margin-bottom: 2rem;
   }
 }

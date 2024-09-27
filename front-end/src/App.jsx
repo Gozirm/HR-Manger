@@ -13,7 +13,6 @@ import Settings from "./Pages/Settings";
 import Error from "./Pages/Error";
 import 'animate.css';
 import Teams from "./Pages/SubPages/Teams";
-import All from "./Pages/Employees";
 import AddEmployees from "./Pages/AddEmployees";
 import Employees from "./Pages/Employees";
 function App() {
