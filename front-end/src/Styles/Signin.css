@@ -1,5 +1,5 @@
 .sign-bg {
-  background-image: url(../../src/assets/1881\ 1.svg);
+  background-image: url(https://res.cloudinary.com/dtswe8t7k/image/upload/v1727440680/1881_1_ire93s.svg);
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -25,7 +25,7 @@
   /* width: 544px; */
   /* margin: auto; */
 }
-.input-signin{
+.input-signin {
   width: 100%;
   background-color: var(--gray);
   border: none;
@@ -33,7 +33,7 @@
   border-radius: 4px;
   padding: 12px;
 }
-.input-signin:focus{
+.input-signin:focus {
   outline-color: var(--blue);
 }
 button {

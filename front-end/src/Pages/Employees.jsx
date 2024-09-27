@@ -12,7 +12,7 @@ const Employees = () => {
       <h1 className="mt-4">Employees</h1>
       <p className="title">Dashboard/Employee</p>
       <div className="d-flex align-items-center justify-content-between">
-        <div className="d-flex align-items-center gap-md-5">
+        <div className="d-flex align-items-center gap-md-5 gap-4">
           <Link
             to="/admin-dashboard/employess"
             className={employeesActive ? "active-link" : "text-secondary"}
@@ -25,7 +25,7 @@ const Employees = () => {
           </Link>
           <Link
             to="/admin-dashboard/employess/teams"
-            className={teamsActive ? "active-link" : "text-secondary"}
+            className={teamsActive ? "active-link" : "text-secondary "}
             onClick={() => {
               setEmployeesActive(false);
               setTeamsActive(true);
@@ -42,6 +42,7 @@ const Employees = () => {
               backgroundColor: "#3439CA",
               fontFamily: "Bricolage Grotesque, sans-serif",
             }}
+            className="newEmployeebtn"
           >
             <img src={addIcon} className="me-1" />
             New Employee
