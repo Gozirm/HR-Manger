@@ -8,8 +8,15 @@ import "../Styles/AdminDashboard.css";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import NavBar from "../layout/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const AdminDashboard = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <>
       <main className="container-fluid d-flex admin-main">
@@ -73,4 +80,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-
