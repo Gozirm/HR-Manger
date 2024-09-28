@@ -19,6 +19,10 @@ import Documents from "./Pages/SubPages/Documents";
 import AccountAccess from "./Pages/SubPages/AccountAccess";
 import PersonalInfo from "./Pages/PersonalInfo";
 import Professional from "./Pages/SubPages/Professional";
+import EditTeams from "./Pages/SubPages/EditTeams";
+import NewTask from "./Pages/SubPages/NewTask";
+import LeaveRequest from "./Pages/SubPages/LeaveRequest";
+import AddPayroll from "./Pages/SubPages/AddPayroll";
 function App() {
   return (
     <>
@@ -33,6 +37,7 @@ function App() {
             <Route path="/admin-dashboard/employess" element={<Employees/>} >
             <Route path="/admin-dashboard/employess/teams" element={<Teams/>}>
             <Route path="/admin-dashboard/employess/teams/new-teams" element={<NewTeams/>}/>
+            <Route path="/admin-dashboard/employess/teams/edit-teams" element={<EditTeams/>}/>
             </Route>
             </Route>
             <Route path="/admin-dashboard/employess/personal-info" element={<PersonalInfo/>}>
@@ -41,12 +46,18 @@ function App() {
             <Route path="/admin-dashboard/employess/personal-info/account-access" element={<AccountAccess/>}/>
             </Route>
             {/* =================================================== */}
-            <Route path="/admin-dashboard/taskboard" element={<TaskBoard />} />
+            <Route path="/admin-dashboard/taskboard" element={<TaskBoard />}>
+            <Route path="/admin-dashboard/taskboard/new-task" element={<NewTask/>}/>
+            </Route>
             <Route
               path="/admin-dashboard/leaveboard"
               element={<LeaveBoard />}
-            />
-            <Route path="/admin-dashboard/payroll" element={<PayRoll />} />
+            >
+              <Route path="/admin-dashboard/leaveboard/leave-request/:itemId" element={<LeaveRequest/>}/>
+            </Route>
+            <Route path="/admin-dashboard/payroll" element={<PayRoll />} >
+            <Route path="/admin-dashboard/payroll/add-payroll" element={<AddPayroll/>}/>
+            </Route>
             <Route path="/admin-dashboard/settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<Error />} />

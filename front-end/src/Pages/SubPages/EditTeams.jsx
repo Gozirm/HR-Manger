@@ -18,13 +18,13 @@ function MyVerticallyCenteredModal(props) {
       <Modal.Body className="text-center px-5 py-4">
         <img src={successIcon} alt="" />
         <h1>Saved Successfully</h1>
-        <p>Employee has been successfully added</p>
+        <p>Edit has been successfully updated</p>
         <Button onClick={props.onHide}>Continue</Button>
       </Modal.Body>
     </Modal>
   );
 }
-const NewTeams = () => {
+const EditTeams = () => {
   const [modalShow, setModalShow] = React.useState(false);
   // Selected
   const [selectedOption, setSelectedOption] = useState("");
@@ -49,13 +49,13 @@ const NewTeams = () => {
     <>
       <main className="mt-lg-5 container">
         <div className="mt-4">
-          <h1 className="mb-4">Create New Team</h1>
+          <h1 className="mb-4">Edit Team</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* 1 */}
             <div className="mb-5">
               <div className=" gap-5 mb-4">
                 <div className="col-lg mb-3 mb-lg-0 w-100">
-                  <label>Amount</label>
+                  <label>Team Name</label>
                   <input
                     type="text"
                     placeholder="Product name"
@@ -65,7 +65,7 @@ const NewTeams = () => {
                   <p className="text-danger">{errors.generalFirst?.message}</p>
                 </div>
                 <div className="col-lg w-100">
-                  <label>Employee Status</label>
+                  <label>Team Manager</label>
                   <select
                     name="gender"
                     id="gender"
@@ -83,7 +83,7 @@ const NewTeams = () => {
                 </div>
               </div>
               <div className="col-lg w-100">
-                <label>Employee Status</label>
+                <label>Team Members</label>
                 <select
                   name="gender"
                   id="gender"
@@ -123,4 +123,4 @@ const NewTeams = () => {
   );
 };
 
-export default NewTeams;
+export default EditTeams;

@@ -6,6 +6,14 @@
   border: 1px solid var(--gray);
   margin-bottom: 2rem;
 }
+.section-pay{
+  width: 25%;
+  height: 140%;
+  border-radius: 10px;
+  padding: 28px 17px 28px 17px;
+  border: 1px solid var(--gray);
+  margin-bottom: 1rem;
+}
 .title-tr {
   font-size: 20px;
   font-weight: 500;
@@ -65,6 +73,35 @@
   padding: 4px, 16px, 4px, 16px;
   border-radius: 50px;
 }
+/* LeaveBoard */
+.declined{
+  color: red;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
+.approved{
+  color: #0d805d;
+  background-color: #e5fff7;
+  width: 115px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.pending{
+  color: #f29b07;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
 /* Employess */
 .on-site {
   color: #0d805d;
@@ -115,5 +152,9 @@
 @media (max-width: 1114px) {
   .sections {
     width: 100%;
+  }
+  .section-pay{
+    width: 100%;
+    text-align: center;
   }
 }
