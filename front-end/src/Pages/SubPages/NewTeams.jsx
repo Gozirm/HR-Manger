@@ -1,13 +1,13 @@
 import React from "react";
 
-const Settings = () => {
+const NewTeams = () => {
   return (
     <>
       <main className="mt-lg-5">
-        <h1>Settings</h1>
+        <h2>Create New Team</h2>
       </main>
     </>
   );
 };
 
-export default Settings;
+export default NewTeams;

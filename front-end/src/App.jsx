@@ -13,8 +13,12 @@ import Settings from "./Pages/Settings";
 import Error from "./Pages/Error";
 import 'animate.css';
 import Teams from "./Pages/SubPages/Teams";
-import AddEmployees from "./Pages/AddEmployees";
 import Employees from "./Pages/Employees";
+import NewTeams from "./Pages/SubPages/NewTeams";
+import Documents from "./Pages/SubPages/Documents";
+import AccountAccess from "./Pages/SubPages/AccountAccess";
+import PersonalInfo from "./Pages/PersonalInfo";
+import Professional from "./Pages/SubPages/Professional";
 function App() {
   return (
     <>
@@ -27,9 +31,15 @@ function App() {
             <Route path="" element={<AdminSummary />} />
             {/* Employess Sub Pages */}
             <Route path="/admin-dashboard/employess" element={<Employees/>} >
-            <Route path="/admin-dashboard/employess/teams" element={<Teams/>}/>
+            <Route path="/admin-dashboard/employess/teams" element={<Teams/>}>
+            <Route path="/admin-dashboard/employess/teams/new-teams" element={<NewTeams/>}/>
             </Route>
-            <Route path="/admin-dashboard/employess/add-employess" element={<AddEmployees/>}/>
+            </Route>
+            <Route path="/admin-dashboard/employess/personal-info" element={<PersonalInfo/>}>
+            <Route path="/admin-dashboard/employess/personal-info/professional" element={<Professional/>}/>
+            <Route path="/admin-dashboard/employess/personal-info/documents" element={<Documents/>}/>
+            <Route path="/admin-dashboard/employess/personal-info/account-access" element={<AccountAccess/>}/>
+            </Route>
             {/* =================================================== */}
             <Route path="/admin-dashboard/taskboard" element={<TaskBoard />} />
             <Route

@@ -8,7 +8,7 @@ import { table } from "../tables";
 const AdminSummary = () => {
   return (
     <>
-      <main className="container">
+      <main className="mt-lg-5 container">
         <h1 className="mt-4">Dashboard</h1>
         <div className="mt-4 gap-4 d-lg-flex d-md-block  ">
           <div className="d-flex justify-content-between align-items-center sections">

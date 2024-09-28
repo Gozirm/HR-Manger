@@ -14,3 +14,11 @@ export const logInSchema = yup
       .oneOf([yup.ref("password")], "password do not match"),
   })
   .required();
+
+export const formSchema = yup
+.object({
+  firstName: yup.string().required("First Name Cannot Be Empty"),
+  lastName: yup.string().required("Last Name Cannot Be Empty"),
+  phoneNum: yup.number().positive().integer("hi").required("Please Enter Your Number"),
+})
+.required()

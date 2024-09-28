@@ -52,6 +52,26 @@
   width: 50%;
   margin-bottom: 3rem;
 }
+/* Add Employees */
+.input-employee{
+  height: 46px;
+  background-color: none;
+  border: 1px solid #959595;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  margin-top: 10px;
+}
+select{
+  appearance: none;
+  background: url(../../src/assets/dropDown.svg) no-repeat 96% ;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select:focus{
+  border: 1px solid;
+  outline: none;
+}
 @media (max-width: 992px) {
   .logo-dash {
     width: 1.5rem;
@@ -68,8 +88,6 @@
   .nav-out {
     margin-left: 200px;
     max-width: 73%;
-    /* margin: auto; */
-
   }
   .teams{
     width: 100%;
@@ -89,5 +107,8 @@
   .teams{
     width: 100%;
     margin-bottom: 2rem;
+  }
+  .addEmploy{
+    font-size: 10px;
   }
 }

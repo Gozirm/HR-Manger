@@ -3,7 +3,7 @@ import React from 'react'
 const LeaveBoard = () => {
   return (
     <>
-    <main>
+    <main className='mt-lg-5'>
         <h1>Leave Board</h1>
     </main>
     </>

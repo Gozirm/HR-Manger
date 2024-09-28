@@ -3,7 +3,7 @@ import React from 'react'
 const TaskBoard = () => {
   return (
     <>
-    <main>
+    <main className='mt-lg-5'>
         <h1>Task Board</h1>
     </main>
     </>
