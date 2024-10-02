@@ -67,6 +67,17 @@ const PayRoll = () => {
                 </div>
               </div>
             </div>
+            <div className="section-pay">
+              <div className="">
+                <h6 className="text-secondary">Total Net Salary</h6>
+                <h2 className="fw-bold">$300,000</h2>
+                <p>Since last month</p>
+                <div className="d-flex gap-2 align-items-center justify-content-center justify-content-lg-start">
+                  <img src={tradeUp} alt="" />
+                  <p className="m-0 text-success">17%</p>
+                </div>
+              </div>
+            </div>
           </div>
           {/* Tables */}
           <div className="mt-5 border p-4  rounded-4">

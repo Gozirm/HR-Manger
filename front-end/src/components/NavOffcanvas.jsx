@@ -47,7 +47,7 @@ const NavOffcanvas = ({ name, ...props }) => {
                 {sidebarLinks.map((sidebarLinks) => {
                   const { id, icon, name, path, activeIcon } = sidebarLinks;
                   return (
-                    <NavLink key={id} to={path} end>
+                    <NavLink key={id} to={path} end onClick={handleClose}>
                     {({ isActive }) => (
                       <section
                         className={`btn-admin  d-flex gap-2 align-items-center ${

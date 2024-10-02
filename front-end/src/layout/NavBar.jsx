@@ -46,9 +46,9 @@ const NavBar = () => {
             <div className="d-flex justify-content-between gap-4 align-items-center nav-side">
               <img src={bell} alt="" />
               <img src={messageIcon} alt="" />
-              <div className="d-flex align-items-center gap-1 ">
+              <div className="d-flex align-items-center gap-2 ">
                 <img src={lady} alt="" />
-                <h4 className="username mt-1">Gozirim Graphic</h4>
+                <h4 className="username mt-1">Gozirim</h4>
                 <img
                   onClick={handleReveal}
                   src={image}

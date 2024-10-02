@@ -149,7 +149,7 @@ const Documents = () => {
               </div>
             </div>
             {/* end */}
-            <div className="d-lg-flex gap-3">
+            <div className="d-lg-flex gap-3 pb-4">
               <Link className="w-25" to="">
                 <button className="cancel">Cancel</button>
               </Link>

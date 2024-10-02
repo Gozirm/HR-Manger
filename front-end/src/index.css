@@ -13,7 +13,7 @@
 }
 
 body {
-  max-width: 1650px;
+  max-width: 100% !important;
   margin: 0 auto;
   scroll-behavior: auto;
 }

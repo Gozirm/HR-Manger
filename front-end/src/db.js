@@ -23,7 +23,7 @@ export const sidebarLinks = [
     id: 2,
     icon: employessIcon,
     activeIcon: activeEmployeesIcon,
-    name: "Employess",
+    name: "Employees",
     path: "/admin-dashboard/employess",
   },
   {

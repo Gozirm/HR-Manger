@@ -125,6 +125,10 @@ select::selection{
 .can{
   width: 25%;
 }
+/* Settings */
+.settings-width{
+  width: 50%;
+}
 @media (max-width: 992px) {
   .logo-dash {
     width: 1.5rem;
@@ -192,5 +196,8 @@ select::selection{
   .can{
     width: 100%;
     margin-top: 1rem;
+  }
+  .settings-width{
+    width: 100%;
   }
 }
