@@ -129,6 +129,10 @@ select::selection{
 .settings-width{
   width: 50%;
 }
+.settings-link-color{
+  font-size: 13px;
+  font-weight: 600;
+}
 @media (max-width: 992px) {
   .logo-dash {
     width: 1.5rem;

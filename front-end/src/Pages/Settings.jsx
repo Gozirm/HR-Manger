@@ -66,7 +66,10 @@ const Settings = () => {
                   <p className="text-danger">{errors.firstName?.message}</p>
                 </div>
                 <div className="mt-3">
-                  <label htmlFor="">Email Address</label>
+                  <div className="d-flex justify-content-between">
+                    <label htmlFor="">Email Address</label>
+                    <Link className="text-primary settings-link-color" to="/auth/forgotpassword">Change Account Email</Link>
+                  </div>
                   <input
                     type="email"
                     placeholder="Akinwumi Aisha"
@@ -87,7 +90,10 @@ const Settings = () => {
             <div className="settings-width mt-2 mt-lg-0">
               <div>
                 <div>
-                  <label htmlFor="">Password</label>
+                  <div className="d-flex justify-content-between">
+                    <label htmlFor="">Password</label>
+                    <Link className="text-primary settings-link-color">Change Password</Link>
+                  </div>
                   <input
                     type="password"
                     placeholder="xxxxxxxx"
