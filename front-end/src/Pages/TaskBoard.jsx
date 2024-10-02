@@ -122,9 +122,7 @@ const TaskBoard = () => {
       ) : (
         <Outlet />
       )}
-      ;
     </>
   );
 };
-
 export default TaskBoard;
