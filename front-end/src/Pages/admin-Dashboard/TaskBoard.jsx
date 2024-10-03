@@ -1,13 +1,13 @@
 import React from "react";
-import "../Styles/AdminSummary.css";
-import inProgressIcon from "../assets/inProgessIcon.svg";
-import completedIcon from "../assets/completedIcon.svg";
-import plannedIcon from "../assets/plannedIcon.svg";
-import allProjectIcon from "../assets/allProjectIcon.svg";
+import "../../Styles/AdminSummary.css";
+import inProgressIcon from "../../assets/inProgessIcon.svg";
+import completedIcon from "../../assets/completedIcon.svg";
+import plannedIcon from "../../assets/plannedIcon.svg";
+import allProjectIcon from "../../assets/allProjectIcon.svg";
 import Table from "react-bootstrap/Table";
-import { table } from "../tables";
+import { table } from "../../tables";
 import { Link } from "react-router-dom";
-import addIcon from "../assets/addIcon.svg";
+import addIcon from "../../assets/addIcon.svg";
 import { useMatch } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 const TaskBoard = () => {

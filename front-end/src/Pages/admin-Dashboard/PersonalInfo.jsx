@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet, Link, useMatch, useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import { formSchema } from "../lib/ValidationScheme";
+import { formSchema } from "../../lib/ValidationScheme";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import iIcon from "../assets/i icon.svg";
+import iIcon from "../../assets/i icon.svg";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import successIcon from "../assets/Success Icon.svg";
+import successIcon from "../../assets/Success Icon.svg";
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal

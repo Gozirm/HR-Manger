@@ -19,6 +19,7 @@ const SignIn = () => {
   const onSubmit = (data) => console.log(data);
   const [reveal, setReveal] = useState(false);
   const [image, setImage] = useState(eyeOpen);
+  const [role, setRole] = useState("employee");
   function handleReveal() {
     if (reveal) {
       console.log("it's false");
@@ -32,12 +33,18 @@ const SignIn = () => {
   }
   const navigate = useNavigate();
   function handleNavigate() {
-    if (handleSubmit(onSubmit)) {
-      console.log("ERROR");
+    if (role === "admin") {
       navigate("/admin-dashboard");
-    } else {
-      console.log("Good");
     }
+    if (role === "employee") {
+      navigate("/empoyee-dashboard");
+    }
+    // if (handleSubmit(onSubmit)) {
+    //   console.log("ERROR");
+    //   navigate("/admin-dashboard");
+    // } else {
+    //   console.log("Good");
+    // }
   }
   return (
     <>

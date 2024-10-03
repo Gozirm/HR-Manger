@@ -1,11 +1,11 @@
 import React from "react";
-import "../Styles/AdminSummary.css";
+import "../../Styles/AdminSummary.css";
 import Table from "react-bootstrap/Table";
-import { leave, table, payroll } from "../tables";
+import { leave, table, payroll } from "../../tables";
 import { Link, Outlet } from "react-router-dom";
-import leavelady from "../assets/leavelady.svg";
-import tradeUp from "../assets/tradeUp.svg";
-import tradeDown from "../assets/tradeDown.svg";
+import leavelady from "../../assets/leavelady.svg";
+import tradeUp from "../../assets/tradeUp.svg";
+import tradeDown from "../../assets/tradeDown.svg";
 import { useMatch } from "react-router-dom";
 
 const PayRoll = () => {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Employ } from "../tables";
+import { Employ } from "../../tables";
 import Table from "react-bootstrap/Table";
 import { Outlet, Link, useMatch } from "react-router-dom";
-import addIcon from "../assets/addIcon.svg";
+import addIcon from "../../assets/addIcon.svg";
 const Employees = () => {
   const match = useMatch("/admin-dashboard/employess");
   const [employeesActive, setEmployeesActive] = useState(true);

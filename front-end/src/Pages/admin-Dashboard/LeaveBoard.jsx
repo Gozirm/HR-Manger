@@ -1,10 +1,10 @@
 import React from "react";
-import "../Styles/AdminSummary.css";
+import "../../Styles/AdminSummary.css";
 import Table from "react-bootstrap/Table";
-import { leave, table } from "../tables";
+import { leave, table } from "../../tables";
 import { Link, Outlet } from "react-router-dom";
-import dottedImg from "../assets/dotted.svg";
-import leavelady from "../assets/leavelady.svg";
+import dottedImg from "../../assets/dotted.svg";
+import leavelady from "../../assets/leavelady.svg";
 import { useMatch } from "react-router-dom";
 const LeaveBoard = () => {
   const match = useMatch("/admin-dashboard/leaveboard")

@@ -2,27 +2,27 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from "./Auth/SignIn";
+import AdminDashboard from "./Pages/admin-Dashboard/AdminDashboard";
 import ForgotPwd from "./Auth/ForgotPwd";
 import CheckEmail from "./Auth/CheckEmail";
-import AdminDashboard from "./Pages/AdminDashboard";
-import AdminSummary from "./Pages/AdminSummary";
-import TaskBoard from "./Pages/TaskBoard";
-import LeaveBoard from "./Pages/LeaveBoard";
-import PayRoll from "./Pages/PayRoll";
-import Settings from "./Pages/Settings";
+import AdminSummary from "./Pages/admin-Dashboard/AdminSummary";
+import TaskBoard from "./Pages/admin-Dashboard/TaskBoard";
+import LeaveBoard from "./Pages/admin-Dashboard/LeaveBoard";
+import PayRoll from "./Pages/admin-Dashboard/PayRoll";
+import Settings from "./Pages/admin-Dashboard/Settings";
 import Error from "./Pages/Error";
-import 'animate.css';
-import Teams from "./Pages/SubPages/Teams";
-import Employees from "./Pages/Employees";
-import NewTeams from "./Pages/SubPages/NewTeams";
-import Documents from "./Pages/SubPages/Documents";
-import AccountAccess from "./Pages/SubPages/AccountAccess";
-import PersonalInfo from "./Pages/PersonalInfo";
-import Professional from "./Pages/SubPages/Professional";
-import EditTeams from "./Pages/SubPages/EditTeams";
-import NewTask from "./Pages/SubPages/NewTask";
-import LeaveRequest from "./Pages/SubPages/LeaveRequest";
-import AddPayroll from "./Pages/SubPages/AddPayroll";
+import Teams from "./Pages/admin-Dashboard/Teams";
+import Employees from "./Pages/employee-Dashboard/Employees";
+import NewTeams from "./Pages/admin-Dashboard/NewTeams";
+import Documents from "./Pages/admin-Dashboard/Documents";
+import AccountAccess from "./Pages/admin-Dashboard/AccountAccess";
+import PersonalInfo from "./Pages/admin-Dashboard/PersonalInfo";
+import Professional from "./Pages/admin-Dashboard/Professional";
+import EditTeams from "./Pages/admin-Dashboard/EditTeams";
+import NewTask from "./Pages/admin-Dashboard/NewTask";
+import LeaveRequest from "./Pages/admin-Dashboard/LeaveRequest";
+import AddPayroll from "./Pages/admin-Dashboard/AddPayroll";
+import EmployeeDash from "./Pages/employee-Dashboard/EmployeeDash";
 function App() {
   return (
     <>
@@ -31,7 +31,7 @@ function App() {
           <Route path="/auth/signin" element={<Signin />} />
           <Route path="/auth/forgotpassword" element={<ForgotPwd />} />
           <Route path="/auth/checkemail" element={<CheckEmail />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />}>
+          <Route path="/admin-dashboard" element={<AdminDashboard/>}>
             <Route path="" element={<AdminSummary />} />
             {/* Employess Sub Pages */}
             <Route path="/admin-dashboard/employess" element={<Employees/>} >
@@ -60,6 +60,7 @@ function App() {
             </Route>
             <Route path="/admin-dashboard/settings" element={<Settings />} />
           </Route>
+          <Route path="/empoyee-dashboard" element={<EmployeeDash/>}/>
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { sidebarLinks } from "../db";
-import logo from "../assets/logo-svg.svg";
-import arrowUp from "../assets/Vector.svg";
-import arrowDown from "../assets/Vector (1).svg";
-import "../Styles/AdminDashboard.css";
+import { sidebarLinks } from "../../db";
+import logo from "../../assets/logo-svg.svg";
+import arrowUp from "../../assets/Vector.svg";
+import arrowDown from "../../assets/Vector (1).svg";
+import "../../Styles/AdminDashboard.css";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import NavBar from "../layout/NavBar";
+import NavBar from "../../layout/NavBar";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 const AdminDashboard = () => {
