@@ -5,8 +5,8 @@ const AuthDropDown = () => {
   return (
     <>
       <Link to="/auth/signin" className="drops">
-        <main className="px-3 bg-primary  py-1 rounded">
-          <h1 className="text-light logout">Logout</h1>
+        <main className="px-3 bg-primary  py-1 rounded animate__heartBeat">
+          <h1 className="text-light logout ">Logout</h1>
         </main>
       </Link>
     </>

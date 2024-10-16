@@ -52,16 +52,15 @@
   width: 50%;
   margin-bottom: 3rem;
 }
-.editTeam{
+.editTeam {
   background-color: white;
   font-weight: 500;
-  color: #3439CA;
+  color: #3439ca;
   width: 150px;
-  border: 2px solid #3439CA;
-  
+  border: 2px solid #3439ca;
 }
 /* Add Employees */
-.personal{
+.personal {
   height: 100vh;
 }
 .input-employee {
@@ -82,7 +81,7 @@ select {
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
-.custom-file-input::-webkit-file{
+.custom-file-input::-webkit-file {
   visibility: hidden;
 }
 .custom-file-input::before {
@@ -91,47 +90,66 @@ select {
   border: 1px solid #999;
   border-radius: 3px;
   padding: 50px 30px 50px 40px;
-  background-color: #EFEFFF;
-  color: #3439CA;
+  background-color: #efefff;
+  color: #3439ca;
   outline: none;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
   background: url(../../src/assets/Stockholm-icons.svg) no-repeat 13%;
 }
-.cancel{
+.cancel {
   background-color: white;
   border-color: red;
   color: red;
   font-weight: 500;
+  width: 100%;
 }
-.save{
-  background-color: #3439CA;
+.save {
+  background-color: #3439ca;
   color: white;
   font-weight: 500;
   width: 25%;
 }
 /* Professional */
-select::selection{
+select::selection {
   color: gray; /* change the text color to white */
 }
 /* LeaveBoard */
-.num-admin-num{
+.num-admin-num {
   font-size: 3rem;
 }
-.view{
+/* Leave Request */
+
+.view {
   width: 25%;
 }
-.can{
+.can {
   width: 25%;
+}
+.profile-img {
+  width: 3rem;
+  margin-bottom: 5px;
+}
+.view-profile-btn {
+  width: 25%;
+}
+.profile-name{
+  font-size: 25px;
 }
 /* Settings */
-.settings-width{
+.settings-width {
   width: 50%;
 }
-.settings-link-color{
+.settings-link-color {
   font-size: 13px;
   font-weight: 600;
+}
+.pointer {
+  cursor: pointer;
+}
+textarea {
+  resize: none;
 }
 @media (max-width: 992px) {
   .logo-dash {
@@ -154,13 +172,22 @@ select::selection{
     width: 100%;
     margin-bottom: 3rem;
   }
-  .save{
+  .save {
     width: 100%;
   }
- .can{
-  width: 100%;
-  margin-top: 1rem;
- } 
+  .cancel {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .profile-name {
+    font-size: 25px;
+  }
+  .profile-email {
+    font-size: 12px;
+  }
+  .view-profile-btn {
+    width: 50%;
+  }
 }
 @media (max-width: 767px) {
   .nav-out {
@@ -178,30 +205,35 @@ select::selection{
   .addEmploy {
     font-size: 10px;
   }
-  .custom-file-input::before{
+  .custom-file-input::before {
     background-position: 30%;
     padding: 50px 30px 50px 40px;
     text-align: center;
     display: block;
-
   }
-  .editTeam{
+  .editTeam {
     width: 100%;
     font-size: 10px;
   }
-  .name{
+  .name {
     font-size: 0.9rem;
     padding-top: 10px;
   }
-  .view{
+  .view {
     font-size: 13px;
     font-weight: 500;
   }
-  .can{
+  .can {
     width: 100%;
     margin-top: 1rem;
   }
-  .settings-width{
+  .settings-width {
     width: 100%;
+  }
+  .profile-name {
+    font-size: 20px;
+  }
+  .profile-email {
+    font-size: 12px;
   }
 }

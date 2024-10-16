@@ -8,11 +8,10 @@ import messageIcon from "../assets/messageIcon.svg";
 import "../Styles/Navbar.css";
 import AuthDropDown from "../components/AuthDropDown";
 import NavOffcanvas from "../components/NavOffcanvas";
-const NavBar = () => {
+const NavBar = (user) => {
   const [isTrue, setisTrue] = useState(false);
   const [image, setImage] = useState(arrowDown);
   function handleReveal() {
-    // isTrue ?  : ;
     if (isTrue) {
       setisTrue(false);
       setImage(arrowDown);
@@ -48,7 +47,7 @@ const NavBar = () => {
               <img src={messageIcon} alt="" />
               <div className="d-flex align-items-center gap-2 ">
                 <img src={lady} alt="" />
-                <h4 className="username mt-1">Gozirim</h4>
+                <h4 className="username mt-1">{user="Gozirim"}</h4>
                 <img
                   onClick={handleReveal}
                   src={image}

@@ -18,7 +18,7 @@ const SignIn = () => {
   });
   const onSubmit = (data) => console.log(data);
   const [reveal, setReveal] = useState(false);
-  const [image, setImage] = useState(eyeOpen);
+  const [image, setImage] = useState(eyeCLose);
   const [role, setRole] = useState("employee");
   function handleReveal() {
     if (reveal) {
@@ -33,18 +33,18 @@ const SignIn = () => {
   }
   const navigate = useNavigate();
   function handleNavigate() {
-    if (role === "admin") {
-      navigate("/admin-dashboard");
-    }
-    if (role === "employee") {
-      navigate("/empoyee-dashboard");
-    }
-    // if (handleSubmit(onSubmit)) {
-    //   console.log("ERROR");
+    // if (role === "admin") {
     //   navigate("/admin-dashboard");
-    // } else {
-    //   console.log("Good");
     // }
+    // if (role === "employee") {
+    //   navigate("/empoyee-dashboard");
+    // }
+    if (handleSubmit(onSubmit)) {
+      console.log("ERROR");
+      navigate("/admin-dashboard");
+    } else {
+      console.log("Good");
+    }
   }
   return (
     <>
@@ -71,7 +71,7 @@ const SignIn = () => {
             <div className="my-2 ">
               <div className="d-flex justify-content-between mb-2 mt-3">
                 <label>Password</label>
-                <Link to="/auth/forgotpassword">Forgot Password?</Link>
+                <Link to="/auth/forgotpassword" className="text-primary">Forgot Password?</Link>
               </div>
               <div className="pass">
                 <input

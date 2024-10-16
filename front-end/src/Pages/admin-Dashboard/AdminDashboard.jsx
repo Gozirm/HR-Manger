@@ -16,10 +16,11 @@ const AdminDashboard = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
   return (
     <>
-      <main className="container-fluid d-flex admin-main">
+      <main
+        className={`container-fluid d-flex admin-main`}
+      >
         {/* main-section */}
         <section className=" admin-body d-none d-md-block d-flex row">
           {/* Logo */}
@@ -44,7 +45,7 @@ const AdminDashboard = () => {
           {/* MAIN SECTION */}
           <section className="main-section">
             <h3 className="mb-4 main-tag">MAIN MENU</h3>
-            <div>
+            <div >
               {sidebarLinks.map((sidebarLinks) => {
                 const { id, icon, name, path, activeIcon } = sidebarLinks;
                 return (

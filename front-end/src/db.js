@@ -56,13 +56,45 @@ export const sidebarLinks = [
   },
 ];
 
+export const EmployeeSideBarLinks = [
+  {
+    id: 1,
+    icon: activeDashboardIcon,
+    activeIcon: dashboardIcon,
+    name: "Dashboard",
+    path: "/employee-dashboard",
+  },
+  {
+    id: 2,
+    icon: taskboardIcon,
+    activeIcon: activeTaskIcon,
+    name: "TaskBoard",
+    path: "/employee-dashboard/taskboard",
+  },
+
+  {
+    id: 3,
+    icon: leaveboardIcon,
+    activeIcon: activeLeaveIcon,
+    name: "LeaveBoard",
+    path: "/employee-dashboard/leaveboard",
+  },
+  {
+    id: 4,
+    icon: settingsIcon,
+    activeIcon: activeSettingIcon,
+    name: "Settings",
+    path: "/employee-dashboard/settings",
+  },
+];
+// Side Bar for Employee
 
 // Teams
-import teamImg from "../src/assets/team1.svg"
-import teamImg2 from "../src/assets/team2.svg"
-import teamImg3 from "../src/assets/team3.svg"
-import teamImg4 from "../src/assets/team4.svg"
-import teamImg5 from "../src/assets/team5.svg"
+import teamImg from "../src/assets/team1.svg";
+import teamImg2 from "../src/assets/team2.svg";
+import teamImg3 from "../src/assets/team3.svg";
+import teamImg4 from "../src/assets/team4.svg";
+import teamImg5 from "../src/assets/team5.svg";
 export const teams = [
   {
     id: 1,

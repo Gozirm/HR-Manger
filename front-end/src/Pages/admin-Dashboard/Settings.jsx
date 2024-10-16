@@ -19,7 +19,7 @@ function MyVerticallyCenteredModal(props) {
       <Modal.Body className="text-center px-5 py-4">
         <img src={successIcon} alt="" />
         <h1>Added Successfully</h1>
-        <p>Employee has been added to payroll</p>
+        <p> Changes has been added </p>
         <Button onClick={props.onHide}>Continue</Button>
       </Modal.Body>
     </Modal>

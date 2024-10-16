@@ -19,8 +19,8 @@ const CheckEmail = () => {
   const onSubmit = (data) => console.log(data);
   const [reveal, setReveal] = useState(false);
   const [revealPwd, setRevealPwd] = useState(false);
-  const [image, setImage] = useState(eyeOpen);
-  const [imagePwd, setimagePwd] = useState(eyeOpen)
+  const [image, setImage] = useState(eyeCLose);
+  const [imagePwd, setimagePwd] = useState(eyeCLose)
   function handleReveal() {
     if (reveal) {
       console.log("it's false");
