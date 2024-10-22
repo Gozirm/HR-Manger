@@ -8,7 +8,7 @@ import arrowUp from "../assets/Vector.svg";
 import arrowDown from "../assets/Vector (1).svg";
 import { sidebarLinks } from "../db";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthProvider";
 const NavOffcanvas = ({ name, ...props }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

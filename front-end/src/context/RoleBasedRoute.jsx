@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth } from "./authContext";
+import { useAuth } from "./AuthProvider";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const RoleBasedRoute = ({ children, requiredRole }) => {
@@ -11,11 +11,10 @@ const RoleBasedRoute = ({ children, requiredRole }) => {
     return <div>Loading...</div>;
   }
   if (!requiredRole.includes(user.role)) {
-    const previousLocation = location.state?.from || "/auth,sign-in";
+    const previousLocation = location.state?.from || "/";
     navigate(previousLocation);
     return;
   }
-  return user ? children : <Navigate to="/auth/sign-in" />;
+  return user ? children : <Navigate to="/" />;
 };
-
 export default RoleBasedRoute;

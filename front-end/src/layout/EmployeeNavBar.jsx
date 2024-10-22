@@ -8,7 +8,7 @@ import messageIcon from "../assets/messageIcon.svg";
 import "../Styles/Navbar.css";
 import AuthDropDown from "../components/AuthDropDown";
 import EmployeeOffcanvas from "../components/EmployeeOffcanvas";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthProvider";
 const EmployeeNavBar = () => {
   const [isTrue, setisTrue] = useState(false);
   const [image, setImage] = useState(arrowDown);

@@ -8,7 +8,7 @@ import cors from "cors"
 
 dotenv.config();
 const app = express();
-const port = 4020;
+const port = process.env.PORT || 4020;
 
 app.use(cors())
 app.use(fileUpload({ useTempFiles: true }));

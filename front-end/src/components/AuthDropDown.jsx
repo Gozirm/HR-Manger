@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthProvider";
 
 const AuthDropDown = () => {
   const { user, isLoading, logout } = useAuth();
