@@ -7,6 +7,23 @@ export const logInSchema = yup
       .string()
       .required("password cannot be empty")
       .min(8, "min lenght of password should be atleast 8 chrs"),
+    })
+    .required();
+    
+export const forgotPwdSchema = yup
+  .object({
+    email: yup.string().required().email("Invalid email format"),
+    })
+    .required();
+
+
+export const signinSchema = yup
+  .object({
+    // email: yup.string().required().email("Invalid email format"),
+    password: yup
+      .string()
+      .required("password cannot be empty")
+      .min(8, "min lenght of password should be atleast 8 chrs"),
       confirmPwd: yup
       .string()
       .required("confirm password cannot be empty")

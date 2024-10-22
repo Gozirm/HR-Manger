@@ -1,5 +1,4 @@
-import React from 'react'
-import LeaveBoard from '../admin-Dashboard/LeaveBoard'
+import React from "react";
 import "../../Styles/AdminSummary.css";
 import Table from "react-bootstrap/Table";
 import { leave, table } from "../../tables";
@@ -10,12 +9,12 @@ import LeaveModal from "../../Auth/ModalPage/LeaveModal";
 import { useMatch } from "react-router-dom";
 import { useState } from "react";
 const EmployeeLeaveBoard = () => {
-    const match = useMatch("/employee-dashboard/leaveboard");
+  const match = useMatch("/employee-dashboard/leaveboard");
   const [modalShow, setModalShow] = React.useState(false);
   const [selectedNewTask, setSelectedNewTask] = useState(null);
   return (
     <>
-    {match ? (
+      {match ? (
         <main className="mt-lg-5 container">
           <h1 className="mt-4">Leaveboard</h1>
           <p className="title">Dashboard/Leaveboard</p>
@@ -120,9 +119,8 @@ const EmployeeLeaveBoard = () => {
       ) : (
         <Outlet />
       )}
-    
     </>
-  )
-}
+  );
+};
 
-export default EmployeeLeaveBoard
+export default EmployeeLeaveBoard;

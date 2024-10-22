@@ -23,11 +23,14 @@ import EditTeams from "./Pages/admin-Dashboard/EditTeams";
 import NewTask from "./Pages/admin-Dashboard/NewTask";
 import AddPayroll from "./Pages/admin-Dashboard/AddPayroll";
 import EmployeeDashboard from "./Pages/employee-Dashboard/EmployeeDashboard";
-import EmployeeLeaveBoard from "./Pages/employee-Dashboard/EmployeeLeaveBoard";
 import EmployeeSummary from "./Pages/employee-Dashboard/EmployeeSummary";
 import EmployeeSettings from "./Pages/employee-Dashboard/EmployeeSettings";
 import EmployeeTaskBoard from "./Pages/employee-Dashboard/EmployeeTaskBoard";
 import EmployeeNewTask from "./Pages/employee-Dashboard/EmployeeNewTask";
+import EmployeeLeaveBoard from "./Pages/employee-Dashboard/EmployeeLeaveBoard";
+import { Toaster } from "react-hot-toast";
+import PrivateRoute from "./context/PrivateRoute";
+import RoleBasedRoute from "./context/RoleBasedRoute";
 function App() {
   return (
     <>
@@ -36,8 +39,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Signin />} />
           <Route path="/auth/forgotpassword" element={<ForgotPwd />} />
-          <Route path="/auth/checkemail" element={<CheckEmail />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />}>
+          <Route path="/auth/checkemail/:resetToken" element={<CheckEmail />} />
+          <Route
+            path="/admin-dashboard"
+            element={
+              <PrivateRoute>
+                <RoleBasedRoute requiredRole={["admin", "super-admin"]}>
+                  <AdminDashboard />
+                </RoleBasedRoute>
+              </PrivateRoute>
+            }
+          >
             <Route path="" element={<AdminSummary />} />
             {/* Employess Sub Pages */}
             <Route path="/admin-dashboard/employess" element={<Employees />}>
@@ -104,15 +116,15 @@ function App() {
             <Route
               path="/employee-dashboard/taskboard"
               element={<EmployeeTaskBoard />}
-            >
-            </Route>
-              <Route
-                path="/employee-dashboard/taskboard/new-task"
-                element={<EmployeeNewTask />}
-              />
+            ></Route>
+            <Route
+              path="/employee-dashboard/taskboard/new-task"
+              element={<EmployeeNewTask />}
+            />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </>
   );

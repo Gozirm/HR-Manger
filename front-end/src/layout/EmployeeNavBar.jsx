@@ -8,9 +8,12 @@ import messageIcon from "../assets/messageIcon.svg";
 import "../Styles/Navbar.css";
 import AuthDropDown from "../components/AuthDropDown";
 import EmployeeOffcanvas from "../components/EmployeeOffcanvas";
-const EmployeeNavBar = (user) => {
+import { useAuth } from "../context/authContext";
+const EmployeeNavBar = () => {
   const [isTrue, setisTrue] = useState(false);
   const [image, setImage] = useState(arrowDown);
+  const {user, isLoading, logout} = useAuth
+
   function handleReveal() {
     if (isTrue) {
       setisTrue(false);
@@ -51,7 +54,7 @@ const EmployeeNavBar = (user) => {
               <img src={messageIcon} alt="" />
               <div className="d-flex align-items-center gap-2 ">
                 <img src={EmployeeUser} alt="" />
-                <h4 className="username mt-1">Divine</h4>
+                <h4 className="username mt-1">{user && user?.firstName}</h4>
                 <img
                   onClick={handleReveal}
                   src={image}

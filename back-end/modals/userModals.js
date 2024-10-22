@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -102,7 +103,10 @@ const userSchema = new Schema(
         }
       },
     },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
   },
+
   { timestamps: true }
 );
 
@@ -115,17 +119,37 @@ userSchema.pre("save", async function (next) {
   next();
 });
 // password comparison
-userSchema.methods.comparePassword = async function(userPassword){
-    const isCorrect = await bcrypt.compare(userPassword, this.password);
-    return isCorrect;
-  }
-  // generate jwt token
-userSchema.methods.generateToken = async function(params){
-    let token = jwt.sign({userId:this._id,role:this.role},process.env.JWT_SECRETE,{
-        expiresIn: '24h',
-      });
-  
-    return token;
-  }
+userSchema.methods.comparePassword = async function (userPassword) {
+  const isCorrect = await bcrypt.compare(userPassword, this.password);
+  return isCorrect;
+};
+// generate jwt token
+userSchema.methods.generateToken = async function (params) {
+  let token = jwt.sign(
+    {
+      userId: this._id,
+      role: this.role,
+      firstName: this.firstName,
+      email: this.email,
+      lastName: this.lastName,
+    },
+    process.env.JWT_SECRETE,
+    {
+      expiresIn: "24h",
+    }
+  );
+
+  return token;
+};
+//   Generating reset password token
+userSchema.methods.getResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  this.resetPasswordExpire = Date.now() + 10 * (60 * 100);
+  return resetToken;
+};
 const USER = mongoose.model("user", userSchema);
 export default USER;

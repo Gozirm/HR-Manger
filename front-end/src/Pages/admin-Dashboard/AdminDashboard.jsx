@@ -10,12 +10,16 @@ import { NavLink } from "react-router-dom";
 import NavBar from "../../layout/NavBar";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 const AdminDashboard = () => {
+  const {user, isLoading, logout} = useAuth()
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
   }, [location]);
+  console.log(user?.email);
   return (
     <>
       <main
@@ -29,7 +33,9 @@ const AdminDashboard = () => {
               <img src={logo} alt="logo" className="logo-dash" />
               <div className="pt-3">
                 <h2 className="h2-admin m-0">HR Manger</h2>
-                <p className="p-admin">hrmanager@yahoo.com</p>
+                <p className="p-admin">{user && user?.email}</p>
+                
+                
               </div>
             </div>
             {/* ARROW */}

@@ -1,9 +1,15 @@
 import USER from "../modals/userModals.js";
-import { sendWelcomeEmail } from "../emails/emailHandlers.js";
+import { sendWelcomeEmail, sendForgotPasswordMail } from "../emails/emailHandlers.js";
 import fs from "fs";
 import { v2 as cloudinary } from "cloudinary";
+import crypto from "crypto"
 
 export const signup = async (req, res) => {
+  if (req.user.role !== "admin" && req.user.role !== "super-admin") {
+    return res
+      .status(403)
+      .json({ success: false, errMsg: "Access denied. Admins only." });
+  }
   const {
     firstName,
     lastName,
@@ -134,6 +140,7 @@ export const signin = async (req, res) => {
         user: {
           role: user.role,
           email: user.email,
+          firstNameName: user.firstName,
           token,
         },
       });
@@ -141,3 +148,73 @@ export const signin = async (req, res) => {
     }
   } catch (error) {}
 };
+
+export const forgotPassword = async (req,res)=>{
+    const {email} =req.body;
+    try {
+      if (!email){
+        res.status(400).json({success:false, errMsg: "input field can not be empty"})
+        return;
+      }
+      const user = await USER.findOne({email});
+      if(!user){
+        res.status(404).json({success:false, errMsg:"email not found"})
+        return
+      }
+      const resetToken = user.getResetPasswordToken()
+      await user.save();
+      res.status(201).json({
+        success: true,
+        message: "mail sent"
+      });
+      
+      const resetUrl = process.env.CLIENT_URL_RESET + resetToken;
+      
+      try {
+        await sendForgotPasswordMail({
+          to: user.email,
+          firstName: user.firstName,
+          resetUrl,
+        })
+  
+        
+      } catch (error) {
+        user.getResetPasswordToken = undefined;
+        user.getResetPasswordExpire = undefined;
+        await user.save();
+        return res.status(500).json({errMsg: "Email couldn't be sent", error})
+        
+      }
+    } catch (error) {
+      res.json(error.message)
+    }
+  }
+
+ export const resetPassword = async (req,res)=>{
+    const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+    try {
+      const user = await USER.findOne({
+        resetPasswordToken,
+        resetPasswordExpire:{$gt:Date.now()}
+        // resetPasswordExpire:{$gt:Date('2024-12-20')}
+  
+      })
+      if(!user){
+        return res.status(400).json({status:false,message:"invalid Reset Token"})
+      }
+      user.password = req.body.password;
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+  
+      await user.save();
+      res.status(201).json({success:true,message:"Password Reset Successfull"})
+      
+    } catch (error) {
+      res.status(500).json(error.message)
+      
+    }
+  }
+
+export const verify = async (req,res) =>{
+    return res.status(201).json({success:true, user:req.user})
+}

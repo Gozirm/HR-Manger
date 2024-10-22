@@ -8,11 +8,12 @@ import arrowUp from "../assets/Vector.svg";
 import arrowDown from "../assets/Vector (1).svg";
 import { sidebarLinks } from "../db";
 import { NavLink } from "react-router-dom";
-
+import { useAuth } from "../context/authContext";
 const NavOffcanvas = ({ name, ...props }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const {user, isLoading, logout} = useAuth()
   return (
     <>
       <div onClick={handleShow}>
@@ -27,7 +28,7 @@ const NavOffcanvas = ({ name, ...props }) => {
                 <img src={logo} alt="logo" className="logo-dash" />
                 <div className="pt-3">
                   <h2 className="h2-admin m-0">HR Manger</h2>
-                  <p className="p-admin">hrmanager@yahoo.com</p>
+                  <p className="p-admin">{user && user?.email}</p>
                 </div>
               </div>
               {/* ARROW */}

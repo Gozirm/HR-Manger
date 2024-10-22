@@ -4,10 +4,13 @@ import { connect } from "./lib/db.js";
 import authRoute from "./routes/authRoutes.js";
 import fileUpload from "express-fileupload";
 import { v2 as cloudinary } from "cloudinary";
+import cors from "cors" 
+
 dotenv.config();
 const app = express();
 const port = 4020;
 
+app.use(cors())
 app.use(fileUpload({ useTempFiles: true }));
 app.get("/", (req, res) => {
   res.status(200).json({ success: true, message: "server is live" });
