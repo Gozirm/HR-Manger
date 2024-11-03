@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     const verifyUser = async () => {
       try {
         if (token) {
-          const request = await axios.get("http://localhost:4020/api/auth/verify", {
+          const request = await axios.get("http://localhost:4000/api/auth/verify", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

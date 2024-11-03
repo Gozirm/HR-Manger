@@ -86,7 +86,7 @@ const Teams = () => {
   const getAllDepartments = async () => {
     try {
       const req = await axios.get(
-        "http://localhost:4020/api/department/all-departments",
+        "http://localhost:4000/api/department/all-departments",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ const Teams = () => {
   // signle dept
   const getDeptById = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4020/api/department/departments/${id}`, {
+      const res = await axios.get(`http://localhost:4000/api/department/departments/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

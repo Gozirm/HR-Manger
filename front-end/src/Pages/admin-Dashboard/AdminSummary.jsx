@@ -22,7 +22,7 @@ const AdminSummary = () => {
   const getCounts = async () => {
     try {
       const req = await axios.get(
-        "http://localhost:4020/api/totalLenght/totalUsers",
+        "http://localhost:4000/api/totalLenght/totalUsers",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -35,7 +35,7 @@ const AdminSummary = () => {
   };
   const getAllTasks = async () => {
     try {
-      const req = await axios.get("http://localhost:4020/api/task", {
+      const req = await axios.get("http://localhost:4000/api/task", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -47,7 +47,7 @@ const AdminSummary = () => {
   const getTaskById = async (id) => {
     try {
       setIsLoading(true);
-      const req = await axios.get(`http://localhost:4020/api/task/${id}`, {
+      const req = await axios.get(`http://localhost:4000/api/task/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +64,7 @@ const AdminSummary = () => {
     try {
       console.log("clicked");
       setIsLoading(true);
-      const req = await axios.delete(`http://localhost:4020/api/task/${id}`, {
+      const req = await axios.delete(`http://localhost:4000/api/task/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

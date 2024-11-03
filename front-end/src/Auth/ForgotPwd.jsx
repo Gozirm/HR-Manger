@@ -24,7 +24,7 @@ const ForgotPwd = () => {
   const onSubmit = async (data) => {
     setisClicked(true);
     try {
-      const req = await fetch("http://localhost:4020/api/auth/forgotpassword", {
+      const req = await fetch("http://localhost:4000/api/auth/forgotpassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,7 @@ import cors from "cors"
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 4020;
+const port = process.env.PORT || 4000;
 
 app.use(cors())
 app.use(fileUpload({ useTempFiles: true }));
@@ -38,7 +38,7 @@ app.use("/api/totalLenght", totalLenghtRoutes)
 connect()
   .then(() => {
     try {
-      app.listen(port, '0.0.0.0', () => {
+      app.listen(port, () => {
         console.log(`http://localhost:${port}`);
       });
     } catch (error) {
