@@ -1,0 +1,246 @@
+.nav-out {
+  margin-left: 220px;
+}
+.admin-body {
+  border-right: 1px solid var(--gray);
+  height: 100%;
+  position: fixed;
+}
+.active {
+  background-color: #edf5ff;
+  color: var(--blue);
+}
+.active-link {
+  border-bottom: 2px solid blue;
+}
+.logo-dash {
+  width: 2.5rem;
+}
+.h2-admin {
+  font-family: var(--font-family-head);
+  font-size: 16px;
+  font-weight: 500;
+}
+.p-admin {
+  color: var(--dark-gray);
+  font-size: 12px;
+}
+.main-tag {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--dark-gray);
+}
+.main-section {
+  font-family: var(--font-family-main);
+  height: 100vh;
+}
+.icon-img {
+  width: 21px;
+  height: 21px;
+}
+.names {
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn-admin {
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+}
+/* Teams */
+.teams {
+  width: 48%;
+  margin-bottom: 3rem;
+}
+.editTeam {
+  background-color: white;
+  font-weight: 500;
+  color: #3439ca;
+  width: 150px;
+  border: 2px solid #3439ca;
+}
+/* Add Employees */
+.personal {
+  height: 100vh;
+}
+.input-employee {
+  height: 46px;
+  background-color: none;
+  border: 1px solid #959595;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+  margin-top: 10px;
+}
+select {
+  appearance: none;
+  background: url(../../src/assets/dropDown.svg) no-repeat 96%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::-webkit-file {
+  visibility: hidden;
+}
+.custom-file-input{
+  position: relative;
+}
+.imagePre{
+  position:absolute;
+  /* top: 49rem; */
+}
+.custom-file-input::before {
+  content: "Upload Image";
+  display: inline-block;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 50px 30px 50px 40px;
+  background-color: #efefff;
+  color: #3439ca;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  background: url(../../src/assets/Stockholm-icons.svg) no-repeat 13%;
+}
+.cancel {
+  background-color: white;
+  border-color: red;
+  color: red;
+  font-weight: 500;
+  width: 100%;
+}
+.save {
+  background-color: #3439ca;
+  color: white;
+  font-weight: 500;
+  width: 25%;
+}
+/* Professional */
+select::selection {
+  color: gray; /* change the text color to white */
+}
+/* LeaveBoard */
+.num-admin-num {
+  font-size: 3rem;
+}
+/* Leave Request */
+
+.view {
+  width: 25%;
+}
+.can {
+  width: 25%;
+}
+.profile-img {
+  width: 3rem;
+  margin-bottom: 5px;
+}
+.view-profile-btn {
+  width: 25%;
+}
+.profile-name{
+  font-size: 25px;
+}
+/* Settings */
+.settings-width {
+  width: 50%;
+}
+.settings-link-color {
+  font-size: 13px;
+  font-weight: 600;
+}
+.pointer {
+  cursor: pointer;
+}
+textarea {
+  resize: none;
+}
+@media (max-width: 992px) {
+  .logo-dash {
+    width: 1.5rem;
+  }
+  .h2-admin {
+    font-size: 12px;
+  }
+  .p-admin {
+    font-size: 9px;
+  }
+  .admin-body {
+    width: 200px;
+  }
+  .nav-out {
+    margin-left: 200px;
+    max-width: 73%;
+  }
+  .teams {
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+  .save {
+    width: 100%;
+  }
+  .cancel {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .profile-name {
+    font-size: 25px;
+  }
+  .profile-email {
+    font-size: 12px;
+  }
+  .view-profile-btn {
+    width: 50%;
+  }
+}
+@media (max-width: 767px) {
+  .nav-out {
+    margin-left: 20px;
+    max-width: 100%;
+    margin: auto;
+  }
+  .newEmployeebtn {
+    font-size: 13px;
+  }
+  .teams {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .addEmploy {
+    font-size: 10px;
+  }
+  .custom-file-input::before {
+    background-position: 30%;
+    padding: 50px 30px 50px 40px;
+    text-align: center;
+    display: block;
+  }
+  .editTeam {
+    width: 100%;
+    font-size: 10px;
+  }
+  .name {
+    font-size: 0.9rem;
+    padding-top: 10px;
+  }
+  .view {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .can {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .settings-width {
+    width: 100%;
+  }
+  .profile-name {
+    font-size: 20px;
+  }
+  .profile-email {
+    font-size: 12px;
+  }
+}

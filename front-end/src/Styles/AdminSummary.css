@@ -1,0 +1,167 @@
+.sections {
+  width: 35%;
+  height: 140%;
+  border-radius: 10px;
+  padding: 28px 17px 28px 17px;
+  border: 1px solid var(--gray);
+  margin-bottom: 2rem;
+}
+.profileImgIcon{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+.section-pay{
+  width: 25%;
+  height: 140%;
+  border-radius: 10px;
+  padding: 28px 17px 28px 17px;
+  border: 1px solid var(--gray);
+  margin-bottom: 1rem;
+}
+.title-tr {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: var(--font-family-main);
+}
+.hastag {
+  border-radius: 5px 0 0 0;
+}
+.action-1 {
+  border-radius: 0 5px 0 0;
+}
+.title-admin {
+  color: #706d6d;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: var(--font-family-main);
+}
+.checkbox[type="checkbox"] {
+  width: 25px;
+  height: 24px;
+  background-color: #706d6d;
+  color: #706d6d;
+  cursor: pointer;
+}
+.action-status {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-family-body);
+}
+/* Dashboard */
+.planned {
+  color: #f29b07;
+  background-color: #fff5e3;
+  width: 93px;
+  margin: auto;
+  height: 27px;
+  padding: 0px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.completed {
+  color: #0d805d;
+  background-color: #e5fff7;
+  width: 115px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.in-progress {
+  color: #137ff2;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
+/* LeaveBoard */
+.declined{
+  color: red;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
+.approved{
+  color: #0d805d;
+  background-color: #e5fff7;
+  width: 115px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.pending{
+  color: #f29b07;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
+/* Employess */
+.on-site {
+  color: #0d805d;
+  background-color: #e5fff7;
+  width: 115px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.hybrid {
+  color: #137ff2;
+  background-color: #9dd2ef42;
+  width: 117px;
+  margin: auto;
+  height: 27px;
+  padding: 4px, 16px, 4px, 16px;
+  border-radius: 50px;
+}
+
+.remote {
+  color: #f29b07;
+  background-color: #fff5e3;
+  width: 93px;
+  margin: auto;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  border-radius: 50px;
+}
+
+.start {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: var(--font-family-body);
+  color: #292929;
+}
+.end {
+  color: #8c8c8c;
+  font-size: 16px;
+  font-weight: 400;
+}
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-family-body);
+}
+@media (max-width: 1114px) {
+  .sections {
+    width: 100%;
+  }
+  .section-pay{
+    width: 100%;
+    text-align: center;
+  }
+  
+}

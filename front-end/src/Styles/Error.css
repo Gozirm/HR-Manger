@@ -1,0 +1,11 @@
+html,body{
+    width: 100%;
+}
+.main-error{
+    height: 100vh;
+    background-size: cover;
+    width: 100%;
+  }
+  .errorImg{
+    width: 100%;
+  }

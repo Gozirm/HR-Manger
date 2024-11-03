@@ -1,0 +1,35 @@
+.pwd-label {
+  font-size: 32px;
+  font-weight: 500;
+}
+.input-pwd {
+  background-color: none;
+  border: none;
+  width: 100%;
+  height: 48px;
+}
+.input-pwd:focus {
+  outline-color: var(--blue);
+}
+.pwd-main {
+  padding: 36px 48px 36px 48px;
+  background-color: #fff;
+  width: 640px;
+  height: auto;
+  border-radius: 8px;
+}
+@media (max-width: 576px) {
+  .sign-bg {
+    background-image: none;
+    height: 100vh;
+  }
+  .pwd-main {
+    padding: 15px 18px 15px 18px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

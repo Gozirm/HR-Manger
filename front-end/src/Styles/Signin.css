@@ -1,0 +1,84 @@
+.sign-bg {
+  background-image: url(https://res.cloudinary.com/dtswe8t7k/image/upload/v1727440680/1881_1_ire93s.svg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.sign-main {
+  background-color: #fff;
+  width: 640px;
+  height: auto;
+  border-radius: 8px;
+  padding: 32px 48px 32px 48px;
+}
+.h2-head {
+  font-family: var(--font-family-head);
+  font-weight: 700;
+  font-size: 27.03px;
+  color: var(--black);
+}
+.h2-body {
+  font-family: var(--font-family-body);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  /* width: 544px; */
+  /* margin: auto; */
+}
+.input-signin {
+  width: 100%;
+  background-color: var(--gray);
+  border: none;
+  height: 48px;
+  border-radius: 4px;
+  padding: 12px;
+}
+.input-signin:focus {
+  outline-color: var(--blue);
+}
+button {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border: 1.5px solid var(--blue);
+  border-radius: 4px;
+}
+label {
+  color: var(--label);
+  font-weight: 500;
+  font-size: 16px;
+}
+.pass {
+  position: relative;
+}
+.sign-in {
+  background-color: var(--blue);
+  font-family: var(--font-family-body);
+  color: white;
+  font-weight: 500;
+}
+.pass-icon {
+  position: absolute;
+  top: 11px;
+  right: 1rem;
+  cursor: pointer;
+}
+@media (max-width: 576px) {
+  .sign-bg {
+    background-image: none;
+    height: 100vh;
+  }
+  .h2-body {
+    width: 100%;
+    font-size: 20px;
+  }
+  .sign-main {
+    padding: 15px 18px 15px 18px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
