@@ -20,8 +20,8 @@ const SignIn = () => {
   } = useForm({
     resolver: yupResolver(logInSchema),
     defaultValues: {
-      email: "divinefavourjoshua03@gmail.com",
-      password: "22222222",
+      email: "testing@gmail.com",
+      password: "00000000",
     },
     logInSchema,
   });

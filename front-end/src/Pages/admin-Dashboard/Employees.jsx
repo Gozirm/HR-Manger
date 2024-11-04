@@ -23,7 +23,7 @@ const Employees = () => {
     setLoading(true); //
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/employee/users?page=${page}&limit=10`,
+        `https://hr-manger.onrender.com/api/employee/users?page=${page}&limit=10`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const Employees = () => {
   const getEmployeeById = async (id) => {
     try {
       setLoading(true);
-      const req = await axios.get(`http://localhost:4000/api/employee/${id}`, {
+      const req = await axios.get(`https://hr-manger.onrender.com/api/employee/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(req.data.employee);
