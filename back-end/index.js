@@ -10,9 +10,9 @@ import taskRoute from "./routes/taskRoute.js"
 import totalLenghtRoutes from "./routes/totalLenghtRoutes.js"
 import cors from "cors" 
 
+const port = process.env.PORT || 4000;
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 4000;
 
 app.use(cors())
 app.use(fileUpload({ useTempFiles: true }));

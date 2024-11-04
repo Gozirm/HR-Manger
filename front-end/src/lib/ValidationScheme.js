@@ -75,10 +75,10 @@ export const signinSchema = yup
     profileImage: yup.mixed().required("Profile Image is required").nullable(),
   });
 
-  export const professionalInformation = yup.object().shape({
-    professionalInformation: yup.string().required("Office of Employment is required"),
+  export const professional = yup.object().shape({
+    professionalInfo: yup.string().required("Office of Employment is required"),
     jobTitle: yup.string().required("Job Title is required"),
-    department: yup.string().oneOf(["Option 1",  "Option 2","Option 3"], "Department is required"),
+    department: yup.string().required("Department is required"),
     employmentStatus: yup.string().oneOf(["on-site",  "remote","hybrid"], "Employment Status is required"),
   });
 

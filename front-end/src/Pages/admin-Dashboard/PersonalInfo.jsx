@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Link, useMatch, useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import { personalInformation } from "../../lib/ValidationScheme";
@@ -33,6 +33,7 @@ const PersonalInfo = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageError, setImageError] = useState("");
   const [selectedOption, setSelectedOption] = useState('');
+
   const match = useMatch("/admin-dashboard/employess/personal-info");
   const {
     register,
@@ -86,6 +87,7 @@ const PersonalInfo = () => {
       reader.readAsDataURL(file);
     }
   };
+
   return (
     <>
       {match ? (

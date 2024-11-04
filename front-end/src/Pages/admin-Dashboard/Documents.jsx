@@ -3,10 +3,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { formSchema } from "../../lib/ValidationScheme";
+import { salary } from "../../lib/ValidationScheme";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import successIcon from "../../assets/Success Icon.svg";
+import toast from "react-hot-toast"
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -34,11 +35,16 @@ const Documents = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(salary),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    localStorage.setItem("salary", JSON.stringify(data))
+    toast.success("Saved Successfull")
+    reset()
+  };
   return (
     <>
       <main className="mt-3 container">
@@ -122,9 +128,9 @@ const Documents = () => {
                     type="number"
                     placeholder="Enter Amount to be paid"
                     className="w-100 input-employee"
-                    {...register("generalFirst")}
+                    {...register("salary")}
                   />
-                  <p className="text-danger">{errors.generalFirst?.message}</p>
+                  <p className="text-danger">{errors.salary?.message}</p>
                 </div>
                 <div className="col-lg w-100">
                   <label>Start Date</label>
@@ -132,12 +138,12 @@ const Documents = () => {
                     type="date"
                     placeholder="Enter Number"
                     className="w-100 input-employee"
-                    {...register("generalSecond")}
+                    {...register("startDate")}
                   />
-                  <p className="text-danger">{errors.generalSecond?.message}</p>
+                  <p className="text-danger">{errors.startDate?.message}</p>
                 </div>
               </div>
-              <div className="col-lg w-100">
+              {/* <div className="col-lg w-100">
                 <label>Frequency</label>
                 <input
                   type="number"
@@ -146,19 +152,19 @@ const Documents = () => {
                   {...register("general")}
                 />
                 <p className="text-danger">{errors.general?.message}</p>
-              </div>
+              </div> */}
             </div>
             {/* end */}
             <div className="d-lg-flex gap-3 pb-4">
               <Link className="w-25" to="">
                 <button className="cancel">Cancel</button>
               </Link>
-              <button className="save mt-3 mt-lg-0"onClick={() => setModalShow(true)}>Save & Continue</button>
+              <button className="save mt-3 mt-lg-0">Save & Continue</button>
             </div>
-            <MyVerticallyCenteredModal
+            {/* <MyVerticallyCenteredModal
               show={modalShow}
               onHide={() => setModalShow(false)}
-            />
+            /> */}
           </form>
         </div>
       </main>

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { professionalInformation } from "../../lib/ValidationScheme";
+import { professional } from "../../lib/ValidationScheme";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import successIcon from "../../assets/Success Icon.svg";
+import axios from "axios";
+import toast from "react-hot-toast"
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -26,19 +28,28 @@ function MyVerticallyCenteredModal(props) {
 }
 const Professional = () => {
   const [personalInfo, setPersonalInfor] = useState(!true);
-  const [professional, setProfessional] = useState(!false);
+  // const [professional, setProfessional] = useState(!false);
   const [documents, setDocuments] = useState(false);
   const [accountAccess, setAccountAccess] = useState(false);
   const [modalShow, setModalShow] = React.useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [departments, setDepartments] = useState([]);
+  const [error, setError] = useState("");
+  const token = localStorage.getItem("hr-token");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(professionalInformation),
+    resolver: yupResolver(professional),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    localStorage.setItem("professional", JSON.stringify(data))
+    console.log(data);
+    toast.success("saved successfully")
+    reset()
+  };
 
   // Selected
   const [selectedOption, setSelectedOption] = useState("");
@@ -51,7 +62,50 @@ const Professional = () => {
   const handleDepartmentChange = (event) => {
     setSelectedDepartmentOption(event.target.value);
   };
-
+  // useEffect(() => {
+  //   const fetchDepartments = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await axios.get(
+  //         "http://localhost:4000/api/department/all-departments",
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       console.log(res.data.departments);
+  //       setDepartments(res.data.departments);
+  //     } catch (error) {
+  //       setError("Failed to fetch departments");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchDepartments();
+  // }, []);
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "http://localhost:4000/api/department/all-departments",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data.departments);
+        setDepartments(response.data.departments);
+      } catch (err) {
+        setError("failed to fetch departments");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDepartments();
+  }, []);
   return (
     <>
       <main className="mt-3 container">
@@ -134,9 +188,11 @@ const Professional = () => {
                   type="text"
                   placeholder="Enter"
                   className="w-100 input-employee"
-                  {...register("professionalInformation")}
+                  {...register("professionalInfo")}
                 />
-                <p className="text-danger">{errors.professionalInformation?.message}</p>
+                <p className="text-danger">
+                  {errors.professionalInfo?.message}
+                </p>
               </div>
               <div className="col-lg w-100">
                 <label>Job Title</label>
@@ -151,26 +207,51 @@ const Professional = () => {
             </div>
             {/* 3 */}
             <div className="d-md-flex gap-5 mb-5">
+              {/* Start */}
               <div className="col-lg w-100 mb-3 mb-lg-0">
                 <label>Department</label>
-                <select
-                  name="gender"
+                {/* <select
+                  // name="gender"
                   id="gender"
                   className="input-employee w-100"
                   {...register("department")}
-                  value={selectedDepartmentOption}
-                  onChange={handleDepartmentChange}
+                  // value={selectedDepartmentOption}
+                  // onChange={handleDepartmentChange}
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected hidden>
                     Select
                   </option>
-                  <option value="Option 1">Option 1</option>
-                  <option value="Option 2">Option 2</option>
-                  <option value="Option 3">Option 3</option>
+                  {loading && <option>Loading...</option>}
+                  {error && <option>{error}</option>}
+                  {departments?.map((department) => {
+                    <option value={department.name} key={department.id}>
+                      {department.name}
+                    </option>;
+                  })}
+                </select> */}
+                <select
+                  className="input-employee w-100"
+                  {...register("department", { required: true })}
+                >
+                  <option disabled selected >
+                    Select
+                  </option>
+                  {loading && <option>Loading...</option>}
+                  {error && <option>{error}</option>}
+                  {departments.map((department) => (
+                    <option
+                      // className="labelss"
+                      key={department.id}
+                      value={department.name}
+                    >
+                      {department.name}
+                    </option>
+                  ))}
                 </select>
-                
+
                 <p className="text-danger">{errors.department?.message}</p>
               </div>
+              {/* End */}
               <div className="col-lg w-100">
                 <label>Employee Status</label>
                 <select
@@ -188,7 +269,9 @@ const Professional = () => {
                   <option value="remote">Remote</option>
                   <option value="hybrid">Hybrid</option>
                 </select>
-                <p className="text-danger">{errors.employmentStatus?.message}</p>
+                <p className="text-danger">
+                  {errors.employmentStatus?.message}
+                </p>
               </div>
             </div>
             {/* end */}
