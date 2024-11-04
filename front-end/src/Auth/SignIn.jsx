@@ -13,6 +13,7 @@ const SignIn = () => {
   const [reveal, setReveal] = useState(false);
   const [image, setImage] = useState(eyeCLose);
   const [isClicked, setisClicked] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,7 +26,6 @@ const SignIn = () => {
     },
     logInSchema,
   });
-  const navigate = useNavigate();
   function handleReveal() {
     if (reveal) {
       console.log("it's false");
@@ -65,6 +65,7 @@ const SignIn = () => {
         toast.error(res.errMsg);
       }
     } catch (error) {
+      
     } finally {
       setisClicked(false);
     }
