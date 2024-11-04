@@ -40,7 +40,7 @@ const SignIn = () => {
   async function handleSign(data) {
     setisClicked(true);
     try {
-      const req = await fetch("http://localhost:4000/api/auth/signin", {
+      const req = await fetch("https://hr-manger.onrender.com/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
