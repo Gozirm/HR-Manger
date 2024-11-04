@@ -20,8 +20,8 @@ const SignIn = () => {
   } = useForm({
     resolver: yupResolver(logInSchema),
     defaultValues: {
-      email: "testing@gmail.com",
-      password: "00000000",
+      email: "divinefavourjoshua03@gmail.com",
+      password: "22222222",
     },
     logInSchema,
   });
@@ -40,34 +40,25 @@ const SignIn = () => {
   async function handleSign(data) {
     setisClicked(true);
     try {
-      const req = await fetch("https://hr-manger.onrender.com/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const req = await fetch(
+        "https://hr-manger.onrender.com/api/auth/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
       const res = await req.json();
       console.log(res);
       if (res.success) {
         toast.success(res.message);
         localStorage.setItem("hr-token", res.user.token);
         if (res.user.role === "super-admin" || res.user.role === "admin") {
-          navigate(
-            "/admin-dashboard",
-            (setTimeout = () => {
-              window.location.reload();
-            }),
-            0.01
-          );
+          navigate("/admin-dashboard");
         } else {
-          navigate(
-            "employee-dashboard",
-            (setTimeout = () => {
-              window.location.reload();
-            }),
-            0.01
-          );
+          navigate("/employee-dashboard");
         }
       }
       if (!res.success) {
