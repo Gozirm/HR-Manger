@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import Loader from "../../Auth/Loader";
 import ModalSection from "../../Auth/ModalPage/ModalSection";
 import axios from "axios";
-import TaskModal from "../../Auth/ModalPage/taskModal";
+import TaskModal from "../../Auth/ModalPage/TaskModal";
 import Button from "react-bootstrap/Button";
 const TaskBoard = () => {
   const match = useMatch("/admin-dashboard/taskboard");
