@@ -46,6 +46,7 @@ export const sidebarLinks = [
     activeIcon: activePayrollIcon,
     name: "PayRoll",
     path: "/admin-dashboard/payroll",
+    disabled: true,
   },
   {
     id: 6,

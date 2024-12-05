@@ -8,7 +8,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import successIcon from "../../assets/Success Icon.svg";
 import axios from "axios";
-import toast from "react-hot-toast"
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -35,6 +36,7 @@ const Professional = () => {
   const [loading, setLoading] = useState(false);
   const [departments, setDepartments] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const token = localStorage.getItem("hr-token");
   const {
     register,
@@ -45,10 +47,11 @@ const Professional = () => {
     resolver: yupResolver(professional),
   });
   const onSubmit = (data) => {
-    localStorage.setItem("professional", JSON.stringify(data))
+    localStorage.setItem("professional", JSON.stringify(data));
     console.log(data);
-    toast.success("saved successfully")
-    reset()
+    toast.success("saved successfully");
+    navigate("/admin-dashboard/employess/personal-info/documents");
+    reset();
   };
 
   // Selected
@@ -62,34 +65,12 @@ const Professional = () => {
   const handleDepartmentChange = (event) => {
     setSelectedDepartmentOption(event.target.value);
   };
-  // useEffect(() => {
-  //   const fetchDepartments = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const res = await axios.get(
-  //         "https://hr-manger.onrender.com/api/department/all-departments",
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       console.log(res.data.departments);
-  //       setDepartments(res.data.departments);
-  //     } catch (error) {
-  //       setError("Failed to fetch departments");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchDepartments();
-  // }, []);
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "https://hr-manger.onrender.com/api/department/all-departments",
+          "http://localhost:4000/api/department/all-departments",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -188,20 +169,28 @@ const Professional = () => {
                   type="text"
                   placeholder="Enter"
                   className="w-100 input-employee"
-                  {...register("professionalInfo")}
+                  {...register("officeOfEmployment")}
                 />
                 <p className="text-danger">
-                  {errors.professionalInfo?.message}
+                  {errors.officeOfEmployment?.message}
                 </p>
               </div>
               <div className="col-lg w-100">
                 <label>Job Title</label>
-                <input
-                  type="text"
-                  placeholder="Enter Title"
-                  className="w-100 input-employee"
-                  {...register("jobTitle")}
-                />
+                <select
+                  className="input-employee w-100"
+                  {...register("jobTitle", { required: true })}
+                >
+                  <option disabled selected hidden>
+                    Select
+                  </option>
+                  <option value="Front-end">Front-end</option>
+                  <option value="Back-end">Back-end</option>
+                  <option value="Product Designer">Product Designer</option>
+                  <option value="Cyber Security">Cyber Security</option>
+                  <option value="Customer Rep">Customer Rep</option>
+                  <option value="Data Analyst">Data Analyst</option>
+                </select>
                 <p className="text-danger">{errors.jobTitle?.message}</p>
               </div>
             </div>
@@ -210,41 +199,22 @@ const Professional = () => {
               {/* Start */}
               <div className="col-lg w-100 mb-3 mb-lg-0">
                 <label>Department</label>
-                {/* <select
-                  // name="gender"
-                  id="gender"
-                  className="input-employee w-100"
-                  {...register("department")}
-                  // value={selectedDepartmentOption}
-                  // onChange={handleDepartmentChange}
-                >
-                  <option value="" disabled selected hidden>
-                    Select
-                  </option>
-                  {loading && <option>Loading...</option>}
-                  {error && <option>{error}</option>}
-                  {departments?.map((department) => {
-                    <option value={department.name} key={department.id}>
-                      {department.name}
-                    </option>;
-                  })}
-                </select> */}
                 <select
                   className="input-employee w-100"
                   {...register("department", { required: true })}
                 >
-                  <option disabled selected >
+                  <option disabled selected>
                     Select
                   </option>
                   {loading && <option>Loading...</option>}
                   {error && <option>{error}</option>}
-                  {departments.map((department) => (
+                  {departments?.map((department) => (
                     <option
                       // className="labelss"
                       key={department.id}
-                      value={department.name}
+                      value={department?.name}
                     >
-                      {department.name}
+                      {department?.name}
                     </option>
                   ))}
                 </select>
@@ -262,7 +232,7 @@ const Professional = () => {
                   value={selectedOption}
                   onChange={handleChange}
                 >
-                  <option value="" disabled>
+                  <option disabled selected>
                     Select
                   </option>
                   <option value="on-site">On-site</option>
@@ -272,6 +242,22 @@ const Professional = () => {
                 <p className="text-danger">
                   {errors.employmentStatus?.message}
                 </p>
+              </div>
+              <div className="col-lg w-100">
+                <label>Role</label>
+                <select
+                  name="role"
+                  id="role"
+                  className="input-employee w-100"
+                  {...register("role")}
+                >
+                  <option value="employee" disabled selected>
+                    Employee
+                  </option>
+                  <option value="admin">Admin</option>
+                  <option value="super-admin">Super Admin</option>
+                </select>
+                <p className="text-danger">{errors.role?.message}</p>
               </div>
             </div>
             {/* end */}

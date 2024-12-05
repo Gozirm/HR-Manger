@@ -53,9 +53,12 @@ const Employees = () => {
   const getEmployeeById = async (id) => {
     try {
       setLoading(true);
-      const req = await axios.get(`https://hr-manger.onrender.com/api/employee/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const req = await axios.get(
+        `https://hr-manger.onrender.com/api/employee/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       console.log(req.data.employee);
 
       setSelectedTask(req.data.employee);
@@ -75,7 +78,7 @@ const Employees = () => {
   }, [page]);
   if (loading)
     return (
-      <div className="d-flex justify-content-center">
+      <div className="vh-100 d-flex justify-content-center align-items-center">
         <Loader />
       </div>
     );
@@ -129,68 +132,74 @@ const Employees = () => {
 
           <div className="mt-5 border p-3 rounded-4">
             <div>
-              <Table responsive="lg" hover role="button">
-                <thead className="text-white">
-                  <tr className="title-tr">
-                    <th className="bg-light hastag">Name</th>
-                    <th className="bg-light">Email</th>
-                    <th className="bg-light">Team</th>
-                    <th className="bg-light">Supervisor</th>
-                    <th className="text-center bg-light action-1">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.map((employe) => {
-                    const {
-                      _id,
-                      firstName,
-                      lastName,
-                      email,
-                      profileImage,
-                      employmentStatus,
-                      role,
-                      department,
-                    } = employe;
-                    return (
-                      <tr
-                        key={_id}
-                        className="title"
-                        onClick={()=>{handleRowClick(_id)}}
-                      >
-                        <td>
-                          <div className="d-flex gap-2 align-items-center">
-                            <img
-                              src={profileImage}
-                              alt=""
-                              className="profileImgIcon"
-                            />
-                            <p className="mt-3 ">{`${firstName} ${lastName}`}</p>
-                          </div>
-                        </td>
-                        <td>
-                          <p className="mt-3">{email}</p>
-                        </td>
-                        <td>
-                          <p className="mt-3">{role}</p>
-                        </td>
-                        <td>
-                          <p className="mt-3">
-                            {department?.manager.firstName}{" "}
-                            {department?.manager.lastName}{" "}
-                          </p>
-                        </td>
-                        <td className="text-center pt-3 ">
-                          <p
-                            className={`action-statu mt-2 ${employmentStatus}`}
-                          >
-                            {employmentStatus}
-                          </p>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
+              {employees.length === 0 ? (
+                <h1>No Employee Yet</h1>
+              ) : (
+                <Table responsive="lg" hover role="button">
+                  <thead className="text-white">
+                    <tr className="title-tr">
+                      <th className="bg-light hastag">Name</th>
+                      <th className="bg-light">Email</th>
+                      <th className="bg-light">Team</th>
+                      <th className="bg-light">Supervisor</th>
+                      <th className="text-center bg-light action-1">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {employees?.map((employe) => {
+                      const {
+                        _id,
+                        firstName,
+                        lastName,
+                        email,
+                        profileImage,
+                        employmentStatus,
+                        role,
+                        department,
+                      } = employe;
+                      return (
+                        <tr
+                          key={_id}
+                          className="title"
+                          onClick={() => {
+                            handleRowClick(_id);
+                          }}
+                        >
+                          <td>
+                            <div className="d-flex gap-2 align-items-center">
+                              <img
+                                src={profileImage}
+                                alt=""
+                                className="profileImgIcon"
+                              />
+                              <p className="mt-3 ">{`${firstName} ${lastName}`}</p>
+                            </div>
+                          </td>
+                          <td>
+                            <p className="mt-3">{email}</p>
+                          </td>
+                          <td>
+                            <p className="mt-3">{role}</p>
+                          </td>
+                          <td>
+                            <p className="mt-3">
+                              {department?.manager?.firstName}{" "}
+                              {department?.manager?.lastName}{" "}
+                            </p>
+                          </td>
+                          <td className="text-center pt-3 ">
+                            <p
+                              className={`action-status mt-2 ${employmentStatus}`}
+                            >
+                              {employmentStatus}
+                            </p>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              )}
               {/* Modal for Employee Details */}
               <Modal
                 show={showModal}

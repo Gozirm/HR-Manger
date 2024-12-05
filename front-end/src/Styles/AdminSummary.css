@@ -6,13 +6,13 @@
   border: 1px solid var(--gray);
   margin-bottom: 2rem;
 }
-.profileImgIcon{
+.profileImgIcon {
   border-radius: 50%;
   width: 30px;
   height: 30px;
   object-fit: cover;
 }
-.section-pay{
+.section-pay {
   width: 25%;
   height: 140%;
   border-radius: 10px;
@@ -59,6 +59,12 @@
   padding: 0px 16px 4px 16px;
   border-radius: 50px;
 }
+.task-modal {
+  color: #747474;
+  font-weight: 400;
+  font-size: 20px;
+  font-family: var(--font-family-main);
+}
 
 .completed {
   color: #0d805d;
@@ -66,7 +72,7 @@
   width: 115px;
   margin: auto;
   height: 27px;
-  padding: 4px 16px 4px 16px;
+  padding: 4px 16px px 16px;
   border-radius: 50px;
 }
 
@@ -80,7 +86,7 @@
   border-radius: 50px;
 }
 /* LeaveBoard */
-.declined{
+.declined {
   color: red;
   background-color: #9dd2ef42;
   width: 117px;
@@ -89,7 +95,7 @@
   padding: 4px, 16px, 4px, 16px;
   border-radius: 50px;
 }
-.approved{
+.approved {
   color: #0d805d;
   background-color: #e5fff7;
   width: 115px;
@@ -99,7 +105,7 @@
   border-radius: 50px;
 }
 
-.pending{
+.pending {
   color: #f29b07;
   background-color: #9dd2ef42;
   width: 117px;
@@ -155,13 +161,59 @@
   font-weight: 500;
   font-family: var(--font-family-body);
 }
+/* Task Modal */
+
+.suggestions-list {
+  height: auto;
+  list-style: none;
+}
+.suggestion-list-li:hover {
+  display: block;
+  background-color: #137ff2;
+  color: white;
+  padding-left: 5px;
+  font-size: 20px;
+  transition: 0.3s;
+
+}
+.suggestion-list-li{
+  background-color: #EBEBEB;
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 20px;
+  width: auto;
+
+}
+.assigned-members-input{
+  margin-bottom: 10px;
+}
+
+.assigned-member {
+  background-color: #EBEBEB;
+  padding: 1%;
+  border-radius: 5px;
+  font-weight: 500;
+  width: auto;
+  margin-left: 1.5%;
+}
+.profileImage {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 @media (max-width: 1114px) {
   .sections {
     width: 100%;
   }
-  .section-pay{
+  .section-pay {
     width: 100%;
     text-align: center;
   }
-  
+  .profileImage {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }

@@ -5,166 +5,179 @@ import { v2 as cloudinary } from "cloudinary";
 import crypto from "crypto";
 import DEPARTMENT from "../modals/departmentModal.js";
 
-// sign-up
 export const signup = async (req, res) => {
-    if (req.user.role !== 'admin' && req.user.role !== 'super-admin') {
-      return res.status(403).json({ success: false, errMsg: "Access denied. Admins only." });
+  // Ensure req.user is available and has a role
+  if (!req.user || (req.user.role !== 'admin' && req.user.role !== 'super-admin')) {
+    return res.status(403).json({ success: false, errMsg: "Access denied. Admins only." });
+  }
+
+  const {
+    firstName,
+    lastName,
+    mobileNumber,
+    email,
+    dateOfBirth,
+    maritalStatus,
+    gender,
+    address,
+    officeOfEmployment,
+    jobTitle,
+    department,
+    employmentStatus,
+    salary,
+    startDate,
+    password,
+    confirmPassword,
+  } = req.body;
+
+  try {
+    // Create an array to hold the names of missing fields
+    const missingFields = [];
+
+    // Check for required fields and push missing ones to the array
+    const requiredFields = [
+      "firstName", "lastName", "mobileNumber", "email", "dateOfBirth",
+      "maritalStatus", "gender", "address", "officeOfEmployment",
+      "jobTitle", "department", "employmentStatus", "salary", "startDate",
+      "password", "confirmPassword"
+    ];
+
+    requiredFields.forEach(field => {
+      if (!req.body[field]) missingFields.push(field);
+    });
+
+    // If there are missing fields, log them and return an error response
+    if (missingFields.length > 0) {
+      console.log("Missing fields:", missingFields);
+      return res.status(400).json({
+        success: false,
+        errMsg: `The following fields are required: ${missingFields.join(", ")}`,
+      });
     }
-    const {
-      firstName,
-      lastName,
-      mobileNumber,
-      email,
-      dateOfBirth,
-      maritalStatus,
-      gender,
-      address,
-      profileImage,
-      officeOfEmployment,
-      jobTitle,
-      department,
-      employmentStatus,
-      salary,
-      startDate,
-      password,
-      confirmPassword,
-    } = req.body;
-  
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        errMsg: "Password and confirm password must match",
+      });
+    }
+
+    // Check for existing email
+    const existingEmail = await USER.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ success: false, errMsg: "Email already exists" });
+    }
+
+    // Check for existing mobile number
+    const existingNumber = await USER.findOne({ mobileNumber });
+    if (existingNumber) {
+      return res.status(400).json({ success: false, errMsg: "Phone number already exists" });
+    }
+
+    // Check for profile image
+    const imageToBeUploaded = req.files?.profileImage?.tempFilePath || req.body.profileImage;
+    if (!imageToBeUploaded) {
+      return res.status(400).json({ success: false, errMsg: 'Image has to be uploaded' });
+    }
+
+    // Upload image to Cloudinary
+    let profileImageUrl;
     try {
-      if (
-        !firstName ||
-        !lastName ||
-        !mobileNumber ||
-        !email ||
-        !dateOfBirth ||
-        !maritalStatus ||
-        !gender ||
-        !address ||
-        !officeOfEmployment ||
-        !jobTitle ||
-        !department ||
-        !employmentStatus ||
-        !salary ||
-        !startDate ||
-        !password ||
-        !confirmPassword
-      ) {
-        res.status(400).json({
-          success: false,
-          errMsg: "all fields are required to register...",
-        });
-        return;
-      }
-      if (password !== confirmPassword) {
-        res.status(400).json({
-          success: false,
-          errMsg: "password and confirm password must match",
-        });
-        return;
-      }
-      const existingEmail = await USER.findOne({ email });
-      if (existingEmail) {
-        res.status(400).json({ success: false, errMsg: "Email already exists" });
-        return;
-      }
-      const existingNumber = await USER.findOne({mobileNumber});
-      if(existingNumber){
-        res.status(400).json({ success: false, errMsg: "phone number already exists"});
-        return;
-      }
-      //
-      if (!req.files || !req.files.profileImage) {
-        return res
-          .status(400)
-          .json({ success: false, errMsg: "Profile image is required" });
-      }
-  
-      const result = await cloudinary.uploader.upload(
-        req.files.profileImage.tempFilePath,
-        {
-          use_filename: true,
-          folder: "hr_manager",
-        }
-      );
-  
-      req.body.profileImage = result.secure_url;
-  
-      fs.unlinkSync(req.files.profileImage.tempFilePath);
-  
-       const newUser = await USER.create({ ...req.body });
-  
-       // Find the department and add the new employee to the members array
-       const dept = await DEPARTMENT.findById(department);
-       if (!dept) {
-         return res.status(404).json({ success: false, errMsg: "Department not found." });
-       }
-   
-       dept.members.push(newUser._id); // Add new user's ID to the members array
-       await dept.save(); // Save the department with the new member
-   
-       // Send a welcome email (optional)
-       const clientUrl = process.env.CLIENT_URL;
-   
-       try {
-         await sendWelcomeEmail({
-           to: newUser.email,
-           firstName: newUser.firstName,
-           clientUrl,
-         });
-       } catch (emailError) {
-         console.error("Error sending welcome email", emailError);
-       }
-   
-       // Return the success response
-       res.status(201).json({
-         success: true,
-         message: "Employee has been successfully added, and the department has been updated.",
-         user: newUser,
-       });
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).json(error.message);
+      const result = await cloudinary.uploader.upload(imageToBeUploaded, {
+        use_filename: true,
+        folder: "hr_manager",
+      });
+      profileImageUrl = result.secure_url;
+    } catch (uploadError) {
+      console.error("Error uploading image to Cloudinary", uploadError);
+      return res.status(500).json({ success: false, errMsg: "Image upload failed" });
     }
-  };
+
+    // Check if department exists
+    const dept = await DEPARTMENT.findOne({ name: department });
+    if (!dept) {
+      return res.status(404).json({ success: false, errMsg: "Department not found." });
+    }
+
+    // Create new user
+    const newUser  = await USER.create({ ...req.body, profileImage: profileImageUrl, department: dept._id });
+    dept.members.push(newUser ._id);
+    await dept.save();
+
+    // Send a welcome email (optional)
+    const clientUrl = process.env.CLIENT_URL;
+    try {
+      await sendWelcomeEmail({
+        to: newUser .email,
+        firstName: newUser .firstName,
+        clientUrl,
+      });
+    } catch (emailError ) {
+      console.error("Error sending welcome email", emailError);
+    }
+
+    // Return the success response
+    res.status(201).json({
+      success: true,
+      message: "Employee has been successfully added, and the department has been updated.",
+      user: newUser ,
+    });
+  } catch (error) {
+    console.error("Error during signup:", error);
+    res.status(500).json({ success: false, errMsg: "Internal Server Error" });
+  }
+};
+
 export const signin = async (req, res) => {
   const { email, password } = req.body;
+
+  // Check for required fields
   if (!email || !password) {
-    res.status(400).json({
+    return res.status(400).json({
       success: false,
-      errMsg: "all field are required to sign in...",
+      errMsg: "All fields are required to sign in...",
     });
-    return;
   }
+
   try {
+    // Find user by email
     const user = await USER.findOne({ email });
     if (!user) {
-      res.status(404).json({ success: false, errMsg: "user not found" });
+      return res.status(404).json({ success: false, errMsg: "User  not found" });
     }
-    //   comparing password and validation password
+
+    // Compare password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      res
-        .status(404)
-        .json({ success: false, errMsg: "Email or Password is Incorrect" });
-      return;
+      return res.status(404).json({ success: false, errMsg: "Email or Password is Incorrect" });
     }
+
+    // Check if profileImage exists
+    if (!user.profileImage) {
+      return res.status(404).json({ success: false, errMsg: "No Profile Image Found" });
+    }
+
+    // Generate token
     const token = await user.generateToken();
     if (token) {
-      res.status(201).json({
+      return res.status(201).json({
         success: true,
-        message: "logged in",
+        message: "Logged in",
         user: {
           role: user.role,
           email: user.email,
-          firstNameName: user.firstName,
+          firstName: user.firstName,
+          profileImageOf:user.profileImage,
           token,
         },
       });
-      return;
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error during sign in:", error);
+    return res.status(500).json({ success: false, errMsg: "Internal Server Error" });
+  }
 };
-
 export const forgotPassword = async (req,res)=>{
     const {email} =req.body;
     try {
@@ -232,5 +245,5 @@ export const forgotPassword = async (req,res)=>{
   }
 
 export const verify = async (req,res) =>{
-    return res.status(201).json({success:true, user:req.user})
+    return res.status(201).json({success:true, message: "Here is the user details", user:req.user})
 }

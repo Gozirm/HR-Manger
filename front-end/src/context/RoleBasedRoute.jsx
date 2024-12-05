@@ -4,7 +4,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const RoleBasedRoute = ({ children, requiredRole }) => {
   const { user, isLoading } = useAuth();
-  const location = useLocation;
+  const location = useLocation();
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -18,3 +18,4 @@ const RoleBasedRoute = ({ children, requiredRole }) => {
   return user ? children : <Navigate to="/" />;
 };
 export default RoleBasedRoute;
+  

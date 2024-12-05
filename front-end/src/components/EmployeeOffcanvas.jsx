@@ -12,7 +12,10 @@ const EmployeeOffcanvas = ({ name, ...props }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const {user, isLoading, logout} = useAuth();
+  const { user, isLoading, logout } = useAuth();
+  const handleLogout = () => {
+    window.location.href = "/"; // Redirect to login page
+  };
   return (
     <>
       <div onClick={handleShow}>
@@ -70,6 +73,14 @@ const EmployeeOffcanvas = ({ name, ...props }) => {
                     </NavLink>
                   );
                 })}
+                <button
+                  className="btn btn-danger btn-md mt-5 pointer"
+                  onClick={() => {
+                    logout, handleClose(), handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
               </div>
             </section>
             {/* Main ========================== */}

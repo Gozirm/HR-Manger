@@ -3,7 +3,7 @@ import React, {
   useState,
   useEffect,
   useContext,
-  Children,
+  children,
 } from "react";
 import axios from "axios";
 
@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
     setUser(user);
   }
   const logout = () => {
+    // window.location.reload()
+    
     setUser(null);
     localStorage.removeItem("hr-token");
   };
@@ -25,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     const verifyUser = async () => {
       try {
         if (token) {
-          const request = await axios.get("https://hr-manger.onrender.com/api/auth/verify", {
+          const request = await axios.get("http://localhost:4000/api/auth/verify", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

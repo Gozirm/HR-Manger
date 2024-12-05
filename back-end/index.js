@@ -8,6 +8,7 @@ import departmentRoutes from "./routes/departmentRoutes.js"
 import employeeRoute from "./routes/employeeRoutes.js"
 import taskRoute from "./routes/taskRoute.js"
 import totalLenghtRoutes from "./routes/totalLenghtRoutes.js"
+import leaveRoute from "./routes/leaveRoutes.js"
 import cors from "cors" 
 
 const port = process.env.PORT || 4000;
@@ -35,6 +36,7 @@ app.use("/api/department", departmentRoutes)
 app.use("/api/employee", employeeRoute)
 app.use("/api/task", taskRoute)
 app.use("/api/totalLenght", totalLenghtRoutes)
+app.use("/api/leave",leaveRoute)
 connect()
   .then(() => {
     try {

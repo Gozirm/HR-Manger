@@ -2,15 +2,15 @@
   position: relative;
   width: 100%;
 }
-nav{
+nav {
   position: relative;
 }
-.dropDown{
+.dropDown {
   position: absolute;
   top: 3rem;
   right: 0.5rem;
 }
-.logout{
+.logout {
   font-size: 15px;
 }
 .search-icon {
@@ -33,8 +33,8 @@ nav{
   font-size: 16px;
   padding-right: 2.5rem;
 }
-.search-input::-webkit-search-cancel-button{
-    display: none;
+.search-input::-webkit-search-cancel-button {
+  display: none;
 }
 ::placeholder {
   color: #b3b3b3;
@@ -42,19 +42,25 @@ nav{
 .search-input:focus {
   outline: none;
 }
-.nav-side{
-    cursor: pointer;
+.nav-side {
+  cursor: pointer;
 }
-@media (max-width: 576px){
-  .dropDown{
+.profileImage {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+@media (max-width: 576px) {
+  .dropDown {
     top: 5.5rem;
   }
-  .logout{
+  .logout {
     font-size: 13px;
   }
 }
-@media(max-width: 992px){
-  .form-nav{
+@media (max-width: 992px) {
+  .form-nav {
     width: 100%;
   }
 }

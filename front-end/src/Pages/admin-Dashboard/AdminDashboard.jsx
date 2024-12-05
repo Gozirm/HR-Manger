@@ -12,19 +12,16 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 const AdminDashboard = () => {
-  const {user, isLoading, logout} = useAuth()
+  const { user, isLoading, logout } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
   }, [location]);
   console.log(user?.email);
   return (
     <>
-      <main
-        className={`container-fluid d-flex admin-main`}
-      >
+      <main className={`container-fluid d-flex admin-main`}>
         {/* main-section */}
         <section className=" admin-body d-none d-md-block d-flex row">
           {/* Logo */}
@@ -34,8 +31,6 @@ const AdminDashboard = () => {
               <div className="pt-3">
                 <h2 className="h2-admin m-0">HR Manger</h2>
                 <p className="p-admin">{user && user?.email}</p>
-                
-                
               </div>
             </div>
             {/* ARROW */}
@@ -51,25 +46,37 @@ const AdminDashboard = () => {
           {/* MAIN SECTION */}
           <section className="main-section">
             <h3 className="mb-4 main-tag">MAIN MENU</h3>
-            <div >
-              {sidebarLinks.map((sidebarLinks) => {
-                const { id, icon, name, path, activeIcon } = sidebarLinks;
+            <div>
+              {sidebarLinks.map((link) => {
+                const { id, icon, name, path, activeIcon, disabled } = link;
                 return (
-                  <NavLink key={id} to={path} end>
-                    {({ isActive }) => (
-                      <section
-                        className={`btn-admin  d-flex gap-2 align-items-center ${
-                          isActive ? "active" : ""
-                        }`}
-                      >
-                        <img
-                          src={isActive ? activeIcon : icon}
-                          className="icon-img"
-                        />
-                        <h6 className="names mt-2"> {name}</h6>
-                      </section>
+                  <div key={id}>
+                    {disabled ? (
+                      <span className="disabled-nav-item">
+                        <section className="btn-admin d-flex gap-2 align-items-center">
+                          <img src={icon} className="icon-img" alt={name} />
+                          <h6 className="names mt-2">{name} (coming soon)</h6>
+                        </section>
+                      </span>
+                    ) : (
+                      <NavLink to={path} end>
+                        {({ isActive }) => (
+                          <section
+                            className={`btn-admin d-flex gap-2 align-items-center ${
+                              isActive ? "active" : ""
+                            }`}
+                          >
+                            <img
+                              src={isActive ? activeIcon : icon}
+                              className="icon-img"
+                              alt={name}
+                            />
+                            <h6 className="names mt-2">{name}</h6>
+                          </section>
+                        )}
+                      </NavLink>
                     )}
-                  </NavLink>
+                  </div>
                 );
               })}
             </div>

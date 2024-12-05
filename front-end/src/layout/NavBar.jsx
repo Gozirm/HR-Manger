@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import lady from "../assets/lady.svg";
 import searchIcon from "../assets/searchIcon.svg";
 import bell from "../assets/Bell.svg";
 import arrowDown from "../assets/arrow_drop_down_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg";
@@ -48,7 +47,7 @@ const NavBar = () => {
               <img src={bell} alt="" />
               <img src={messageIcon} alt="" />
               <div className="d-flex align-items-center gap-2 ">
-                <img src={lady} alt="" />
+                <img src={user && user?.profileImage} alt="" className="profileImage" />
                 <h4 className="username mt-1">{user && user?.firstName}</h4>
                 <img
                   onClick={handleReveal}

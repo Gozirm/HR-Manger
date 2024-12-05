@@ -61,7 +61,8 @@ export const getAllTasks = async (req, res) => {
         startDate: task.startDate,
         endDate: task.endDate,
         status: task.status,
-        _id:task._id
+        _id:task._id,
+        description:task.description
       };
     });
 
@@ -71,6 +72,49 @@ export const getAllTasks = async (req, res) => {
     });
   } catch (error) {
     console.error(error.message);
+    res.status(500).json({ success: false, errMsg: "Server error." });
+  }
+};
+
+// get total of status
+
+export const getTotalStatusCounts = async (req, res) => {
+  try {
+    // Use aggregation to count tasks by status
+    const counts = await Task.aggregate([
+      {
+        $group: {
+          _id: "$status", 
+          count: { $sum: 1 }, 
+        },
+      },
+    ]);
+
+    // Prepare the response object with default values
+    const statusCounts = {
+      planned: 0,
+      completed: 0,
+      "in-progress": 0,
+      total: 0,
+    };
+
+    // Populate the counts into the response object
+    counts.forEach((item) => {
+      if (statusCounts[item._id] !== undefined) {
+        statusCounts[item._id] = item.count;
+      }
+    });
+
+        statusCounts.total = statusCounts.planned + statusCounts.completed + statusCounts["in-progress"];
+
+
+    // Send the response
+    res.status(200).json({
+      success: true,
+      statusCounts,
+    });
+  } catch (error) {
+    console.error("Error fetching status counts:", error);
     res.status(500).json({ success: false, errMsg: "Server error." });
   }
 };
@@ -140,7 +184,7 @@ export const editTask = async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(
       id,
-      { title, description, assignedMembers, startDate, endDate, status },
+      { status },
       { new: true, runValidators: true }
     );
 
@@ -154,5 +198,55 @@ export const editTask = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, errMsg: "Server error." });
+  }
+};
+
+// employee's assigned task
+export const getAssignedTasks = async (req, res) => {
+  const { userId } = req.user; 
+
+  try {
+    const tasks = await Task.find({ assignedMembers: userId })
+      .populate('assignedMembers', 'firstName lastName email profileImage') 
+      .select('title assignedMembers startDate endDate status description'); 
+
+    if (tasks.length === 0) {
+      return res.status(404).json({ success: false, errMsg: "No task(s) for you yet." });
+    }
+
+    res.status(200).json({ success: true, tasks });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, errMsg: "Server error." });
+  }
+};
+// employee's get a single task
+export const getSingleTask = async (req, res) => {
+  const { taskId } = req.params; 
+
+  try {
+    const task = await Task.findById(taskId)
+      .populate('assignedMembers', 'firstName lastName profileImage')
+
+    if (!task) {
+      return res.status(404).json({ success: false, errMsg: "Task not found" });
+    }
+
+    const responseTask = {
+      title: task.title,
+      description: task.description,
+      assignedMembers: task.assignedMembers.map(member => ({
+        id: member._id,
+        fullName: `${member.firstName} ${member.lastName}`,
+        profileImage: member.profileImage,
+      })),
+      startDate: task.startDate,
+      endDate: task.endDate,
+      status: task.status,
+    };
+
+    res.status(200).json({ success: true, task: responseTask });
+  } catch (error) {
+    return res.status(500).json({ message: "Server Error", error: error.message });
   }
 };

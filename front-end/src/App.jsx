@@ -14,7 +14,6 @@ import Settings from "./Pages/admin-Dashboard/Settings";
 import Error from "./Pages/Error";
 import Teams from "./Pages/admin-Dashboard/Teams";
 import Employees from "./Pages/admin-Dashboard/Employees";
-import NewTeams from "./Pages/admin-Dashboard/NewTeams";
 import Documents from "./Pages/admin-Dashboard/Documents";
 import AccountAccess from "./Pages/admin-Dashboard/AccountAccess";
 import PersonalInfo from "./Pages/admin-Dashboard/PersonalInfo";
@@ -50,17 +49,13 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route path="" element={<AdminSummary />} />
+            <Route index element={<AdminSummary />} />
             {/* Employess Sub Pages */}
             <Route path="/admin-dashboard/employess" element={<Employees />}>
               <Route
                 path="/admin-dashboard/employess/teams"
                 element={<Teams />}
               >
-                <Route
-                  path="/admin-dashboard/employess/teams/new-teams"
-                  element={<NewTeams />}
-                />
                 <Route
                   path="/admin-dashboard/employess/teams/edit-teams"
                   element={<EditTeams />}
@@ -94,7 +89,7 @@ function App() {
               path="/admin-dashboard/leaveboard"
               element={<LeaveBoard />}
             ></Route>
-            <Route path="/admin-dashboard/payroll" element={<PayRoll />}>
+            <Route >
               <Route
                 path="/admin-dashboard/payroll/add-payroll"
                 element={<AddPayroll />}

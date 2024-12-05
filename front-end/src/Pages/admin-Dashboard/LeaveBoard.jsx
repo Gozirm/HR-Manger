@@ -1,47 +1,152 @@
 import React from "react";
 import "../../Styles/AdminSummary.css";
 import Table from "react-bootstrap/Table";
-import { leave, table } from "../../tables";
-import { Link, Outlet } from "react-router-dom";
-import dottedImg from "../../assets/dotted.svg";
-import leavelady from "../../assets/leavelady.svg";
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 import LeaveModal from "../../Auth/ModalPage/LeaveModal";
 import { useMatch } from "react-router-dom";
-import { useState } from "react";
-
+import Loader from "../../Auth/Loader";
+import { getAllLeaves } from "../../components/getAllLeaves";
+import LeaveModalRequest from "../../components/LeaveModalRequest";
 const LeaveBoard = () => {
   const match = useMatch("/admin-dashboard/leaveboard");
-  const [modalShow, setModalShow] = React.useState(false);
-  const [selectedNewTask, setSelectedNewTask] = useState(null);
+  const [showModal, setShowModal] = React.useState(false);
+  const [selectedLeave, setSelectedLeave] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [modalShowRequest, setModalShowRequest] = useState(false);
+  const [counts, setCounts] = useState({});
+  const [Adminrole, setAdminrole] = useState();
+  const token = localStorage.getItem("hr-token");
+  const totalCounts = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/department/counts-departments",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data.departments);
+      setCounts(response.data.departments);
+    } catch (error) {}
+  };
+  const role = async () => {
+    try {
+      const res = await axios.get("http://localhost:4000/api/department/roles");
+      console.log(res.data.count);
+      setAdminrole(res.data.count);
+    } catch (error) {}
+  };
+  const fetchLeaves = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const leaves = await getAllLeaves(token);
+      setData((prevData) => {
+        // Prepend new leaves to the existing data
+        return [...leaves, ...prevData];
+      });
+    } catch (error) {
+      setError("Error fetching leaves");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const handleModalShow = async (leaveId) => {
+    console.log("id passed to handleModalShow:", leaveId); // Log the id
+    if (!leaveId) {
+      console.error("Invalid id: leaveid is undefined or null");
+      return; // Exit if leaveid is not valid
+    }
+    try {
+      setIsLoading(true);
+      console.log(22);
+      const req = await axios.get(
+        `http://localhost:4000/api/leave/${leaveId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(req.data);
+      setSelectedLeave(req.data);
+      setShowModal(true);
+    } catch (error) {
+      setError("Error fetching leave details");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchLeaves();
+    totalCounts();
+    role();
+  }, []);
+  if (isLoading) {
+    return (
+      <div className="vh-100 d-flex justify-content-center align-items-center">
+        {" "}
+        <Loader />{" "}
+      </div>
+    );
+  }
+  const handleRowClick = (leaveId) => {
+    handleModalShow(leaveId);
+  };
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
   return (
     <>
       {match ? (
         <main className="mt-lg-5 container">
-          <h1 className="mt-4">Leaveboard</h1>
-          <p className="title">Dashboard/Leaveboard</p>
+          <div className="d-flex align-items-center justify-content-between">
+            <div>
+              <h1 className="mt-4">Leaveboard</h1>
+              <p className="title">Dashboard/Leaveboard</p>
+            </div>
+            <button
+              className="btn btn-md btn-primary w-25"
+              onClick={() => setModalShowRequest(true)}
+            >
+              Request Leave
+            </button>
+          </div>
           <div className="mt-4 gap-4 d-lg-flex d-md-block  ">
             <div className="sections">
               <div className="text-center">
                 <h6 className="title-admin">HR/Admin</h6>
-                <h2 className="num-admin-num">3</h2>
+                <h2 className="num-admin-num">{Adminrole}</h2>
               </div>
             </div>
             <div className="sections">
               <div className="text-center">
                 <h6 className="title-admin">Product</h6>
-                <h2 className="num-admin-num">5</h2>
+                <h2 className="num-admin-num">
+                  {counts?.Selling?.membersLength + 1}
+                </h2>
               </div>
             </div>
             <div className="sections">
               <div className="text-center">
                 <h6 className="title-admin">Marketing</h6>
-                <h2 className="num-admin-num">4</h2>
+                <h2 className="num-admin-num">
+                  {" "}
+                  {counts.Marketing?.membersLength + 1}
+                </h2>
               </div>
             </div>
             <div className="sections">
               <div className="text-center">
                 <h6 className="title-admin">Operations</h6>
-                <h2 className="num-admin-num">6</h2>
+                <h2 className="num-admin-num">
+                  {counts?.Operations?.membersLength + 1}
+                </h2>
               </div>
             </div>
           </div>
@@ -61,47 +166,50 @@ const LeaveBoard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {leave.map((titled) => {
-                    const { id, title, icon, start, end, action, days, leave } =
-                      titled;
+                  {data.map((leave) => {
+                    const {
+                      Days,
+                      endDate,
+                      leaveType,
+                      profileImage,
+                      startDate,
+                      status,
+                      fullName,
+                      id,
+                    } = leave;
                     return (
-                      <tr key={id}>
+                      <tr
+                        key={id}
+                        onClick={() => handleRowClick(leave?.id)}
+                        role="button"
+                      >
                         <td className="title">
-                          <div
-                            className="d-flex gap-2 pointer"
-                            onClick={() => {
-                              setSelectedNewTask(titled);
-                              setModalShow(true);
-                            }}
-                          >
-                            <img src={leavelady} alt="" />
-                            <p className="mt-3">Oluwatosin Sanya</p>
+                          <div className="d-flex gap-2">
+                            <img
+                              src={profileImage}
+                              alt=""
+                              className="profileImage mt-lg-2 mt-3"
+                            />
+                            <p className="mt-3">{fullName}</p>
                           </div>
                         </td>
                         <td className="title">
-                          <p className="mt-3">{leave}</p>
+                          <p className="mt-3">{leaveType}</p>
                         </td>
                         <td>
                           <div className="mt-3">
-                            <p className="m-0 start">{start}</p>
-                            <p className="end">{end}</p>
+                            <p className="m-0 start">
+                              {startDate.slice(0, 10)}
+                            </p>
+                            <p className="end">{endDate.slice(0, 10)}</p>
                           </div>
                         </td>
                         <td className="text-center pt-3 title">
-                          <p className="mt-3">{days}</p>
+                          <p className="mt-3">{Days}</p>
                         </td>
                         <td className="text-center pt-3 ">
-                          <p
-                            className={`action-status mt-2 ${action
-                              .replace(/\s+/, "-")
-                              .toLowerCase()}`}
-                          >
-                            {action}
-                          </p>
-                        </td>
-                        <td className="text-center pt-3 ">
-                          <p className="mt-2">
-                            <img src={dottedImg} alt="" />
+                          <p className={`action-status mt-2  ${status}`}>
+                            {status}
                           </p>
                         </td>
                       </tr>
@@ -111,11 +219,21 @@ const LeaveBoard = () => {
               </Table>
             </div>
             <LeaveModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              newtask={selectedNewTask}
+              show={showModal}
+              onHide={() => {
+                setShowModal(false);
+                fetchLeaves();
+              }}
+              newtask={selectedLeave}
             />
           </div>
+          <LeaveModalRequest
+            show={modalShowRequest}
+            onHide={() => {
+              setModalShowRequest(false);
+              fetchLeaves();
+            }}
+          />
         </main>
       ) : (
         <Outlet />

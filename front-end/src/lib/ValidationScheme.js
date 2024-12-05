@@ -76,10 +76,21 @@ export const signinSchema = yup
   });
 
   export const professional = yup.object().shape({
-    professionalInfo: yup.string().required("Office of Employment is required"),
-    jobTitle: yup.string().required("Job Title is required"),
+    officeOfEmployment: yup.string().required("Office of Employment is required"),
+    jobTitle: yup.string().oneOf(
+      [
+        "Product Designer",
+        "Front-end",
+        "Back-end",
+        "Cyber Security",
+        "Customer Rep",
+        "Data Analyst",
+      ],
+      "Employment Status is required"
+    ),
     department: yup.string().required("Department is required"),
     employmentStatus: yup.string().oneOf(["on-site",  "remote","hybrid"], "Employment Status is required"),
+    role: yup.string().oneOf(["admin","Super-admin", "employee"])
   });
 
   export const salary = yup.object().shape({
@@ -91,4 +102,16 @@ export const signinSchema = yup
  export const userAccount = yup.object().shape({
     password: yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
     confirmPassword: yup.string().oneOf([yup.ref('password'), null], "Passwords must match").required("Confirm Password is required"),
+  });
+
+  export const requestLeave = yup.object().shape({
+    leaveType: yup
+      .string()
+      .oneOf(
+        ["Sick Leave", "Annual Leave", "Casual Leave"],
+        "Leave Type Is required"
+      ),
+    startDate: yup.string().required("Start date is required"),
+    endDate: yup.string().required("End date is required"),
+    description: yup.string().required("Must Not be empty is required"),
   });

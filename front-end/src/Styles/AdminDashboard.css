@@ -1,6 +1,11 @@
 .nav-out {
   margin-left: 220px;
 }
+.disabled-nav-item {
+  color: gray; /* Change color to indicate disabled */
+  pointer-events: none; /* Prevent clicks */
+  cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+}
 .admin-body {
   border-right: 1px solid var(--gray);
   height: 100%;

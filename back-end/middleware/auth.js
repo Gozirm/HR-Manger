@@ -8,9 +8,7 @@ export const auth = async (req, res, next) => {
       .status(401)
       .json({ success: false, message: "No token provided" });
   }
-
   const token = authHeader.split(" ")[1];
-
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRETE);
     if (!payload) {
@@ -24,6 +22,7 @@ export const auth = async (req, res, next) => {
       firstName: payload.firstName,
       email: payload.email,
       lastName: payload.lastName,
+      profileImage: payload?.profileImage,
     };
     next();
   } catch (error) {

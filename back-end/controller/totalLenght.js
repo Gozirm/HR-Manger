@@ -21,23 +21,4 @@ export const totalLenghtOfUsers = async (req, res) => {
   } catch (error) {
     res.status(404).json({ error });
   }
-  // };
-
-  // export const totalLenghtOfTask = async (req, res) => {
-  //   try {
-  //     const task = await Task.find()
-  //     res.status(200).json({ success: true, message: `total task is ${task.lenght}` });
-  //   } catch (error) {
-  //     res.status(404).json({errMsg})
-
-  //   }
-  // };
-
-  // export const totalLenghtOfLeaves = async (req, res) => {
-  //   try {
-  //     const totalLeaves = 3;
-  //     res.status(200).json({ success: true, message: `Total Leaves is ${totalLeaves}` });
-  //   } catch (error) {
-  //     res.status(404).json({errMsg})
-  //   }
 };

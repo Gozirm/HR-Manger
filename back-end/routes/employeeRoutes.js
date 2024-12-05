@@ -21,4 +21,5 @@ router.get(
   restrict("admin", "super-admin"),
   searchUsers
 );
+
 export default router;

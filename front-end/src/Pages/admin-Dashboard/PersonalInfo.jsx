@@ -5,26 +5,8 @@ import { personalInformation } from "../../lib/ValidationScheme";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import iIcon from "../../assets/i icon.svg";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import successIcon from "../../assets/Success Icon.svg";
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body className="text-center px-5 py-4">
-        <img src={successIcon} alt="" />
-        <h1>Saved Successfully</h1>
-        <p>Employee has been successfully added</p>
-        <Button onClick={props.onHide}>Continue</Button>
-      </Modal.Body>
-    </Modal>
-  );
-}
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const PersonalInfo = () => {
   const [personalInfo, setPersonalInfor] = useState(true);
   const [professional, setProfessional] = useState(false);
@@ -32,8 +14,8 @@ const PersonalInfo = () => {
   const [accountAccess, setAccountAccess] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [imageError, setImageError] = useState("");
-  const [selectedOption, setSelectedOption] = useState('');
-
+  const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate();
   const match = useMatch("/admin-dashboard/employess/personal-info");
   const {
     register,
@@ -57,13 +39,13 @@ const PersonalInfo = () => {
           ...data,
           profileImage: base64Image,
         };
-      
-
+        toast.success("Saved Successfully");
         localStorage.setItem("personalInfo", JSON.stringify(formDataWithImage));
-        setSelectedOption('');
-        reset();
+        setSelectedOption("");
         setImagePreview(null);
         console.log("Saved to local storage:", formDataWithImage);
+        navigate("/admin-dashboard/employess/personal-info/professional");
+        reset();
       };
       reader.readAsDataURL(file);
     } else {
@@ -219,7 +201,7 @@ const PersonalInfo = () => {
                     type="date"
                     placeholder="Select Date"
                     className="w-100 input-employee"
-                    {...register("dateOfBirth", {required:true})}
+                    {...register("dateOfBirth", { required: true })}
                   />
                   <p className="text-danger">{errors.dateOfBirth?.message}</p>
                 </div>
@@ -230,10 +212,7 @@ const PersonalInfo = () => {
                     id="gender"
                     className="input-employee w-100"
                     {...register("maritalStatus")}
-                    // value={selectedOption}
-                    // onChange={handleChange}
                   >
-                    
                     <option disabled selected>
                       Select
                     </option>
@@ -249,14 +228,13 @@ const PersonalInfo = () => {
                 <div className="col-lg mb-3 mb-lg-0 w-100">
                   <label>Gender</label>
                   <select
-                    name="gender"
-                    id="gender"
+                    id=""
                     className="input-employee w-100"
-                    {...register("gender",{required:true})}
+                    {...register("gender", { required: true })}
                     value={selectedOption}
                     // onChange={handleGenderChange}
                   >
-                    <option selected disabled >
+                    <option selected disabled>
                       Select
                     </option>
                     <option value="female">Female</option>
@@ -292,7 +270,7 @@ const PersonalInfo = () => {
                   }}
                 />
                 <input
-                required
+                  required
                   type="file"
                   className="custom-file-input "
                   {...register("profileImage", { required: true })}
@@ -304,21 +282,17 @@ const PersonalInfo = () => {
               {/* end */}
               <div className="d-lg-flex gap-3 pb-4">
                 {/* <Link className="w-25"> */}
-                  <button
-                    className="cancel w-25"
-                    onClick={() => {
-                      reset();
-                      setImagePreview(null);
-                    }}
-                  >
-                    Cancel
-                  </button>
-                {/* </Link> */}
                 <button
-                  className="save mt-3 mt-lg-0"
+                  className="cancel w-25"
+                  onClick={() => {
+                    reset();
+                    setImagePreview(null);
+                  }}
                 >
-                  Save & Continue
+                  Cancel
                 </button>
+                {/* </Link> */}
+                <button className="save mt-3 mt-lg-0">Save & Continue</button>
               </div>
             </form>
           </div>

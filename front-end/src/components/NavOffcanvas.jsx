@@ -13,13 +13,21 @@ const NavOffcanvas = ({ name, ...props }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const {user, isLoading, logout} = useAuth()
+  const { user, isLoading, logout } = useAuth();
+  const handleLogout = () => {
+    window.location.href = "/"; // Redirect to login page
+  };
   return (
     <>
       <div onClick={handleShow}>
         <img src={menu} alt="" className="menu" />
       </div>
-      <Offcanvas show={show} onHide={handleClose} {...props}  style={{width:"53%", height: "100%"}}>
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        {...props}
+        style={{ width: "53%", height: "100%" }}
+      >
         <Offcanvas.Body>
           <section className="d-flex row">
             {/* Logo */}
@@ -45,26 +53,46 @@ const NavOffcanvas = ({ name, ...props }) => {
             <section className="main-section">
               <h3 className="mb-4 main-tag">MAIN MENU</h3>
               <div>
-                {sidebarLinks.map((sidebarLinks) => {
-                  const { id, icon, name, path, activeIcon } = sidebarLinks;
+                {sidebarLinks.map((link) => {
+                  const { id, icon, name, path, activeIcon, disabled } = link;
                   return (
-                    <NavLink key={id} to={path} end onClick={handleClose}>
-                    {({ isActive }) => (
-                      <section
-                        className={`btn-admin  d-flex gap-2 align-items-center ${
-                          isActive ? "active" : ""
-                        }`}
-                      >
-                        <img
-                          src={isActive ? activeIcon : icon}
-                          className="icon-img"
-                        />
-                        <h6 className="names mt-2"> {name}</h6>
-                      </section>
-                    )}
-                  </NavLink>
+                    <div key={id}>
+                      {disabled ? (
+                        <span className="disabled-nav-item">
+                          <section className="btn-admin d-flex gap-2 align-items-center">
+                            <img src={icon} className="icon-img" alt={name} />
+                            <h6 className="names mt-2">{name} (coming soon)</h6>
+                          </section>
+                        </span>
+                      ) : (
+                        <NavLink to={path} end onClick={handleClose}>
+                          {({ isActive }) => (
+                            <section
+                              className={`btn-admin d-flex gap-2 align-items-center ${
+                                isActive ? "active" : ""
+                              }`}
+                            >
+                              <img
+                                src={isActive ? activeIcon : icon}
+                                className="icon-img"
+                                alt={name}
+                              />
+                              <h6 className="names mt-2">{name}</h6>
+                            </section>
+                          )}
+                        </NavLink>
+                      )}
+                    </div>
                   );
                 })}
+                <button
+                  className="btn btn-danger btn-md mt-5 pointer"
+                  onClick={() => {
+                    logout, handleClose(), handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
               </div>
             </section>
             {/* Main ========================== */}

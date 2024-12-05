@@ -7,7 +7,8 @@ import { salary } from "../../lib/ValidationScheme";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import successIcon from "../../assets/Success Icon.svg";
-import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -30,7 +31,7 @@ const Documents = () => {
   const [professional, setProfessional] = useState(false);
   const [documents, setDocuments] = useState(!false);
   const [accountAccess, setAccountAccess] = useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -41,9 +42,10 @@ const Documents = () => {
     resolver: yupResolver(salary),
   });
   const onSubmit = (data) => {
-    localStorage.setItem("salary", JSON.stringify(data))
-    toast.success("Saved Successfull")
-    reset()
+    localStorage.setItem("salary", JSON.stringify(data));
+    toast.success("Saved Successfull");
+    navigate("/admin-dashboard/employess/personal-info/account-access");
+    reset();
   };
   return (
     <>
@@ -135,7 +137,7 @@ const Documents = () => {
                 <div className="col-lg w-100">
                   <label>Start Date</label>
                   <input
-                    type="date"
+                    type="text"
                     placeholder="Enter Number"
                     className="w-100 input-employee"
                     {...register("startDate")}
@@ -143,28 +145,16 @@ const Documents = () => {
                   <p className="text-danger">{errors.startDate?.message}</p>
                 </div>
               </div>
-              {/* <div className="col-lg w-100">
-                <label>Frequency</label>
-                <input
-                  type="number"
-                  placeholder="Enter Email Address"
-                  className="w-100 input-employee"
-                  {...register("general")}
-                />
-                <p className="text-danger">{errors.general?.message}</p>
-              </div> */}
             </div>
             {/* end */}
             <div className="d-lg-flex gap-3 pb-4">
               <Link className="w-25" to="">
                 <button className="cancel">Cancel</button>
               </Link>
-              <button className="save mt-3 mt-lg-0">Save & Continue</button>
+              <button className="save mt-3 mt-lg-0" type="submit">
+                Save & Continue
+              </button>
             </div>
-            {/* <MyVerticallyCenteredModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-            /> */}
           </form>
         </div>
       </main>

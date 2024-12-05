@@ -38,38 +38,35 @@ const SignIn = () => {
     }
   }
   async function handleSign(data) {
-    setisClicked(true);
+    setisClicked(true)
     try {
-      const req = await fetch(
-        "https://hr-manger.onrender.com/api/auth/signin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
+        const req = await fetch("http://localhost:4000/api/auth/signin", {
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(data)
+        })
+        const res = await req.json();
+        console.log(res);
+        if (!res.success) {
+            toast.error(res.errMsg)
         }
-      );
-      const res = await req.json();
-      console.log(res);
-      if (res.success) {
-        toast.success(res.message);
-        localStorage.setItem("hr-token", res.user.token);
-        if (res.user.role === "super-admin" || res.user.role === "admin") {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/employee-dashboard");
+        if (res.success) {
+            toast.success(res.message)
+            localStorage.setItem("hr-token", res.user.token)
+            if (res.user.role === "super-admin" || res.user.role === "admin") {
+                navigate("/admin-dashboard")
+            }else{
+                navigate("/employee-dashboard")
+            }
         }
-      }
-      if (!res.success) {
-        toast.error(res.errMsg);
-      }
     } catch (error) {
-      
-    } finally {
-      setisClicked(false);
+        
+    }finally{
+        setisClicked(false)
     }
-  }
+}
   const btnText = isClicked ? "Loading" : "Sign in";
   return (
     <>

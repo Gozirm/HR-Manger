@@ -53,7 +53,7 @@ const EmployeeNavBar = () => {
               <img src={bell} alt="" />
               <img src={messageIcon} alt="" />
               <div className="d-flex align-items-center gap-2 ">
-                <img src={EmployeeUser} alt="" />
+                <img src={user && user?.profileImage} alt="" className="profileImage"/>
                 <h4 className="username mt-1">{user && user?.firstName}</h4>
                 <img
                   onClick={handleReveal}

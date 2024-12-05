@@ -1,3 +1,4 @@
+import Task from "../modals/taskModal.js";
 import USER from "../modals/userModals.js";
 
 // update employee
@@ -114,7 +115,6 @@ export const searchUsers = async (req, res) => {
         .status(404)
         .json({ success: false, errMsg: "No users found." });
     }
-
     // Return the list of found users
     res.status(200).json({
       success: true,

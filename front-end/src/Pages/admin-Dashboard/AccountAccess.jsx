@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { formSchema } from "../../lib/ValidationScheme";
+import { userAccount } from "../../lib/ValidationScheme";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import successIcon from "../../assets/Success Icon.svg";
+import toast from "react-hot-toast";
+import axios from "axios";
+
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -29,16 +32,82 @@ const AccountAccess = () => {
   const [professional, setProfessional] = useState(false);
   const [documents, setDocuments] = useState(false);
   const [accountAccess, setAccountAccess] = useState(!false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(userAccount),
   });
-  const onSubmit = (data) => console.log(data);
+  const token = localStorage.getItem("hr-token");
+  const onSubmit = async (data) => {
+    console.log(data);
+    // Save the password or perform other actions
+    localStorage.setItem("userAccount", JSON.stringify(data));
+    const personalInfo = JSON.parse(localStorage.getItem("personalInfo"));
+    const professionalInfo = JSON.parse(localStorage.getItem("professional"));
+    const salaryInfo = JSON.parse(localStorage.getItem("salary"));
+    const finalPayload = new FormData();
+    finalPayload.append("firstName", personalInfo?.firstName || "");
+    finalPayload.append("lastName", personalInfo?.lastName || "");
+    finalPayload.append("mobileNumber", personalInfo?.mobileNumber || "");
+    finalPayload.append("email", personalInfo?.email || "");
+    finalPayload.append("dateOfBirth", personalInfo?.dateOfBirth || "");
+    finalPayload.append("maritalStatus", personalInfo?.maritalStatus || "");
+    finalPayload.append("gender", personalInfo?.gender || "");
+    finalPayload.append("address", personalInfo?.address || "");
+    finalPayload.append("profileImage", personalInfo?.profileImage);
+    finalPayload.append("jobTitle", professionalInfo?.jobTitle || "");
+    finalPayload.append("department", professionalInfo?.department || "");
+    finalPayload.append("role", professionalInfo?.role || "");
+    finalPayload.append(
+      "officeOfEmployment",
+      professionalInfo?.officeOfEmployment || ""
+    );
+    finalPayload.append(
+      "employmentStatus",
+      professionalInfo?.employmentStatus || ""
+    );
+    finalPayload.append("salary", salaryInfo?.salary || 0);
+    finalPayload.append("startDate", salaryInfo?.startDate || "");
+    finalPayload.append("password", data?.password || "");
+    finalPayload.append("confirmPassword", data?.confirmPassword || "");
 
+    console.log("Final Payload:", finalPayload);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/signup",
+        finalPayload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+        navigate("/admin-dashboard/employess");
+      }
+      console.log("Signup successful:", response.data);
+      localStorage.removeItem("personalInfo");
+      localStorage.removeItem("professionalInfo");
+      localStorage.removeItem("salary");
+      localStorage.removeItem("userAccount");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.errMsg || "An error occurred");
+      } else {
+        toast.error("An unexpected error occurred");
+      }
+      console.error("Signup error:", error);
+    }
+
+    reset();
+  };
   // Selected
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -130,20 +199,10 @@ const AccountAccess = () => {
             {/* 1 */}
             <div className="mb-3">
               <div className="d-md-flex gap-5 mb-4">
-                <div className="col-lg mb-3 mb-lg-0 w-100">
-                  <label>Username</label>
-                  <input
-                    type="text"
-                    placeholder="Enter office"
-                    className="w-100 input-employee"
-                    {...register("generalFirst")}
-                  />
-                  <p className="text-danger">{errors.generalFirst?.message}</p>
-                </div>
                 <div className="col-lg w-100">
                   <label>Password</label>
                   <input
-                    type="password"
+                    type="text"
                     placeholder="Enter Password"
                     className="w-100 input-employee"
                     {...register("password")}
@@ -156,22 +215,14 @@ const AccountAccess = () => {
                 <div className="col-lg mb-3 mb-lg-0 w-100">
                   <label>Confirm Password</label>
                   <input
-                    type="password"
+                    type="text"
                     placeholder="Comfirm Password"
                     className="w-100 input-employee"
-                    {...register("confirmPwd")}
+                    {...register("confirmPassword")}
                   />
-                  <p className="text-danger">{errors.confirmPwd?.message}</p>
-                </div>
-                <div className="col-lg w-100">
-                  <label>Recovery Email Address</label>
-                  <input
-                    type="email"
-                    placeholder="Enter Email Address"
-                    className="w-100 input-employee"
-                    {...register("generalSecond")}
-                  />
-                  <p className="text-danger">{errors.generalSecond?.message}</p>
+                  <p className="text-danger">
+                    {errors.confirmPassword?.message}
+                  </p>
                 </div>
               </div>
             </div>
@@ -182,15 +233,16 @@ const AccountAccess = () => {
               </Link>
               <button
                 className="save mt-3 mt-lg-0"
-                onClick={() => setModalShow(true)}
+                // onClick={() => setModalShow(true)}
+                disabled={isSubmitting}
               >
                 Save & Continue
               </button>
             </div>
-            <MyVerticallyCenteredModal
+            {/* <MyVerticallyCenteredModal
               show={modalShow}
               onHide={() => setModalShow(false)}
-            />
+            /> */}
           </form>
         </div>
       </main>
