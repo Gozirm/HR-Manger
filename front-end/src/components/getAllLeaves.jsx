@@ -1,7 +1,7 @@
 import axios from "axios";
 export const getAllLeaves = async (token) => {
   try {
-    const req = await axios.get("http://localhost:4000/api/leave/all-leaves", {
+    const req = await axios.get("https://hr-manger.onrender.com/api/leave/all-leaves", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     try {
       setisActive("--");
       const res = await axios.get(
-        "http://localhost:4000/api/leave/employee/activitie",
+        "https://hr-manger.onrender.com/api/leave/employee/activitie",
         {
           headers: {
             Authorization: `Bearer ${token}`,

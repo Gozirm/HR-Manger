@@ -24,7 +24,7 @@ const LeaveBoard = () => {
   const totalCounts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/department/counts-departments",
+        "https://hr-manger.onrender.com/api/department/counts-departments",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const LeaveBoard = () => {
   };
   const role = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/department/roles");
+      const res = await axios.get("https://hr-manger.onrender.com/api/department/roles");
       console.log(res.data.count);
       setAdminrole(res.data.count);
     } catch (error) {}
@@ -67,7 +67,7 @@ const LeaveBoard = () => {
       setIsLoading(true);
       console.log(22);
       const req = await axios.get(
-        `http://localhost:4000/api/leave/${leaveId}`,
+        `https://hr-manger.onrender.com/api/leave/${leaveId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

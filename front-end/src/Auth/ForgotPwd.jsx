@@ -44,27 +44,6 @@ const ForgotPwd = () => {
       setisClicked(false);
     }
   };
-
-  // const onSubmit = async (data) => {
-  //   setisClicked(true);
-
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:4020/api/auth/forgotpassword",
-  //       data
-  //     );
-  //     console.log(res);
-  //     if (!res.data.success) {
-  //       toast.error(res.data.errMsg);
-  //     }
-  //     if (res.data.success) {
-  //       toast.success(res.data.message);
-  //     }
-  //   } catch (error) {
-  //   } finally {
-  //     setisClicked(false);
-  //   }
-  // };
   return (
     <>
       <main className="sign-bg d-flex align-items-center justify-content-center">

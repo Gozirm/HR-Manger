@@ -13,7 +13,7 @@ const NewTaskModal = (props) => {
   const getRole = async () => {
     try {
       const req = await axios.get(
-        "http://localhost:4000/api/department/roles",
+        "https://hr-manger.onrender.com/api/department/roles",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ const NewTaskModal = (props) => {
     try {
       setIsSubmitting(true);
       const req = await axios.post(
-        "http://localhost:4000/api/department/create",
+        "https://hr-manger.onrender.com/api/department/create",
         newTeam,
         {
           headers: {

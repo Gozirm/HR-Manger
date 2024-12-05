@@ -15,7 +15,7 @@ const LeaveModal = (param) => {
     const token = localStorage.getItem("hr-token");
     try {
       const req = await fetch(
-        `http://localhost:4000/api/leave/approve/${leaveId}`,
+        `https://hr-manger.onrender.com/api/leave/approve/${leaveId}`,
         {
           method: "PATCH",
           headers: {
@@ -48,7 +48,7 @@ const LeaveModal = (param) => {
     const token = localStorage.getItem("hr-token");
     try {
       const req = await fetch(
-        `http://localhost:4000/api/leave/${leaveId}/decline`,
+        `https://hr-manger.onrender.com/api/leave/${leaveId}/decline`,
         {
           method: "PATCH",
           headers: {

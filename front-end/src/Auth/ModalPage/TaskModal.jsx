@@ -24,7 +24,7 @@ const TaskModal = (props) => {
       const fetchSuggestions = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:4000/api/employee/users/search?query=${searchQuery}`,
+            `https://hr-manger.onrender.com/api/employee/users/search?query=${searchQuery}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ const TaskModal = (props) => {
     try {
       setIsSubmitting(true);
       const req = await axios.post(
-        "http://localhost:4000/api/task/task",
+        "https://hr-manger.onrender.com/api/task/task",
         newTask,
         {
           headers: {

@@ -29,7 +29,7 @@ const TaskBoard = () => {
 
   const getAllTasks = async () => {
     try {
-      const req = await axios.get("http://localhost:4000/api/task/", {
+      const req = await axios.get("https://hr-manger.onrender.com/api/task/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,7 +42,7 @@ const TaskBoard = () => {
   const getStatusCounts = async () => {
     try {
       const req = await axios.get(
-        "http://localhost:4000/api/task//tasks/status-counts",
+        "https://hr-manger.onrender.com/api/task//tasks/status-counts",
         {
           headers: {
             Authorization: `Bearer ${token}`,

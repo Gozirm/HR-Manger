@@ -25,7 +25,7 @@ const LeaveModalRequest = (props) => {
 
   const submitRequest = async (data) => {
     try {
-      const req = await fetch("http://localhost:4000/api/leave/apply", {
+      const req = await fetch("https://hr-manger.onrender.com/api/leave/apply", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

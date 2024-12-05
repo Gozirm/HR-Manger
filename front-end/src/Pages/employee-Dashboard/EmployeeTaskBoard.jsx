@@ -22,7 +22,7 @@ const EmployeeTaskBoard = () => {
   const fetchAssignedTasks = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/task/tasks/assigned",
+        "https://hr-manger.onrender.com/api/task/tasks/assigned",
         {
           headers: {
             Authorization: `Bearer ${token}`,

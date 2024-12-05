@@ -53,7 +53,7 @@ const CheckEmail = () => {
     setisClicked(true);
     try {
       const req = await fetch(
-        `http://localhost:4000/api/auth/resetpassword/${resetToken}`,
+        `https://hr-manger.onrender.com/api/auth/resetpassword/${resetToken}`,
         {
           method: "PUT",
           headers: {

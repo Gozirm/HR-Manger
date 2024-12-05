@@ -70,7 +70,7 @@ const Professional = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          "http://localhost:4000/api/department/all-departments",
+          "https://hr-manger.onrender.com/api/department/all-departments",
           {
             headers: {
               Authorization: `Bearer ${token}`,

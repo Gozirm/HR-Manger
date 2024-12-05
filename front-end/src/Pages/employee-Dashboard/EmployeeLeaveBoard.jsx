@@ -26,7 +26,7 @@ const EmployeeLeaveBoard = () => {
     setError(null);
     try {
       const req = await axios.get(
-        "http://localhost:4000/api/leave/employee/leaves",
+        "https://hr-manger.onrender.com/api/leave/employee/leaves",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ const EmployeeLeaveBoard = () => {
     setIsLoading(true);
     try {
       const req = await axios.get(
-        "http://localhost:4000/api/leave/leave/Type",
+        "https://hr-manger.onrender.com/api/leave/leave/Type",
         {
           headers: {
             Authorization: `Bearer ${token}`,
