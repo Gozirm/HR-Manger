@@ -45,7 +45,7 @@ const EmployeeSummary = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:4040/api/leave/employee/activities`,
+        `https://hr-manger.onrender.com/api/leave/employee/activities`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ const EmployeeSummary = () => {
   const getTaskById = async (id) => {
     try {
       setIsLoading(true);
-      const req = await axios.get(`http://localhost:4040/api/employee/${id}`, {
+      const req = await axios.get(`https://hr-manger.onrender.com/api/employee/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
