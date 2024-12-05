@@ -69,7 +69,7 @@ const CheckEmail = () => {
       }
       if (res.success) {
         toast.success(res.message);
-        navigate("https://hr-manger.vercel.app");
+        navigate("");
       }
     } catch (error) {
     } finally {
