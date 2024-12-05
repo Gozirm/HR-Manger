@@ -69,7 +69,7 @@ const CheckEmail = () => {
       }
       if (res.success) {
         toast.success(res.message);
-        navigate("");
+        navigate("/");
       }
     } catch (error) {
     } finally {
