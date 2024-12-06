@@ -71,7 +71,7 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
 
   export function sendTaskAssignmentEmail(
   firstName,
-  title,
+  taskTitle,
   taskDescription,
   startDate,
   endDate,
@@ -98,7 +98,7 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
       <p style="font-size: 18px; color: #0077B5;"><strong>Hello ${firstName},</strong></p>
       <p>You have been assigned a new task:</p>
       <div style="background-color: #f3f6f8; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p><strong>Task Title:</strong> ${title}</p> 
+        <p><strong>Task Title:</strong> ${taskTitle}</p> 
         <p><strong>Description:</strong> ${taskDescription}</p> 
         <p><strong>Start Date:</strong> ${startDate}</p> 
         <p><strong>End Date:</strong> ${endDate}</p> 
