@@ -1,5 +1,5 @@
 export function createWelcomeEmailTemplate(firstName, clientUrl) {
-    return `
+  return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -35,11 +35,10 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
     </body>
     </html>
     `;
-  }
+}
 
-
-  export function resetPasswordEmailTemplate(firstName, resetUrl) {
-    return `
+export function resetPasswordEmailTemplate(firstName, resetUrl) {
+  return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -67,9 +66,9 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
     </body>
     </html>
     `;
-  }
+}
 
-  export function sendTaskAssignmentEmail(
+export function sendTaskAssignmentEmail(
   firstName,
   taskTitle,
   taskDescription,
@@ -79,7 +78,7 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
   assignedMembers
 ) {
   const membersList = assignedMembers
-    .map((member) =>` <li>${member.firstName} ${member.lastName}</li>`)
+    .map((member) => ` <li>${member.firstName} ${member.lastName}</li>`)
     .join("");
   return `
   <!DOCTYPE html>
@@ -98,7 +97,7 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
       <p style="font-size: 18px; color: #0077B5;"><strong>Hello ${firstName},</strong></p>
       <p>You have been assigned a new task:</p>
       <div style="background-color: #f3f6f8; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p><strong>Task Title:</strong> ${taskTitle}</p> 
+        <p><strong>Task Title:</strong> ${clientUrl}</p> 
         <p><strong>Description:</strong> ${taskDescription}</p> 
         <p><strong>Start Date:</strong> ${startDate}</p> 
         <p><strong>End Date:</strong> ${endDate}</p> 
@@ -109,7 +108,7 @@ export function createWelcomeEmailTemplate(firstName, clientUrl) {
       </ul>
       <p>Click the button below to log in and view your tasks:</p>
       <div style="text-align: center; margin: 30px 0;">
-        <a href="${clientUrl}" style="background-color: #0077B5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; transition: background-color 0.3s;">Log in</a>
+        <a href="${taskTitle}" style="background-color: #0077B5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; transition: background-color 0.3s;">Log in</a>
       </div>
       <p>If you have any questions or need assistance, our support team is always here to help.</p>
       <p>Best regards,<br>Your Task Management Team</p>
