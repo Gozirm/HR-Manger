@@ -100,12 +100,12 @@ export function sendTaskAssignmentEmail(
         <p><strong>Task Title:</strong> ${clientUrl}</p> 
         <p><strong>Description:</strong> ${taskDescription}</p> 
         <p><strong>Start Date:</strong> ${startDate}</p> 
-        <p><strong>End Date:</strong> ${endDate}</p> 
+        <p><strong>End Date:</strong> ${endDate} checking</p> 
       </div>
         <p><strong>Assigned Members:</strong></p>
-      <ul style="background-color: #f9f9f9; padding: 15px; border-radius: 8px;">
-        ${membersList}
-      </ul>
+      // <ul style="background-color: #f9f9f9; padding: 15px; border-radius: 8px;">
+      //   ${membersList}
+      // </ul>
       <p>Click the button below to log in and view your tasks:</p>
       <div style="text-align: center; margin: 30px 0;">
         <a href="${taskTitle}" style="background-color: #0077B5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; transition: background-color 0.3s;">Log in</a>
